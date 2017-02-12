@@ -52,7 +52,7 @@ namespace Lottery
                 myButton.BackColor = Color.White;
                 myNumList1.Remove(Convert.ToInt32(myButton.Text));
             }
-
+            myNumList1.Sort();
             foreach (int myNum in myNumList1)
             {
                 strNum += string.Format("{0:D2}, ", myNum);
@@ -82,7 +82,7 @@ namespace Lottery
                 myButton.BackColor = Color.White;
                 myNumList2.Remove(Convert.ToInt32(myButton.Text));
             }
-
+            myNumList2.Sort();
             foreach (int myNum in myNumList2)
             {
                 strNum += string.Format("{0:D2}, ", myNum);
@@ -205,20 +205,49 @@ namespace Lottery
         private void btnBingoAuto_Click(object sender, EventArgs e)
         {
             Random R = new Random();
-            myNumList1.Clear();
             string strNum = "";
-            Console.WriteLine(sender);
-            
+            int Count = 0;
 
-            do
+            foreach (Button myButton in myDButtonList1)
+            {
+                if (myButton.BackColor == Color.Orange)
+                {
+                    myButton.BackColor = Color.White;
+                    myNumList1.Remove(Convert.ToInt32(myButton.Text));
+                } else if (myButton.BackColor == Color.Red)
+                {
+                    Count++;
+                }
+            }
+
+            if (Count == 10)
+            {
+                MessageBox.Show("請選擇小於10個數字");
+            }
+            else if (myNumList1.Count == 10)
+            {
+                myNumList1.Clear();
+            }
+
+            while (myNumList1.Count < 10)
             {
                 int Number = R.Next(1, 81);
                 if (myNumList1.IndexOf(Number) < 0)
                 {
                     myNumList1.Add(Number);
                 }
+            }
 
-            } while (myNumList1.Count < 10);
+            foreach (int myNum in myNumList1)
+            {
+                foreach (Button myButton in myDButtonList1)
+                {
+                    if (myButton.Text == myNum.ToString() && myButton.BackColor != Color.Red)
+                    {
+                        myButton.BackColor = Color.Orange;
+                    }
+                }
+            }
 
             myNumList1.Sort();
 
@@ -226,20 +255,24 @@ namespace Lottery
             {
                 strNum += string.Format("{0:D2}, ", myList);
             }
-            tbBingoNumber.Text = strNum;
 
-            myNumList1.Clear();
+            tbBingoNumber.Text = strNum;
         }
 
         private void btnBingoConfirm_Click(object sender, EventArgs e)
         {
-            tbBingoNumber.Text = "";
-
-
-            myNumList1.Clear();
-            foreach (Button myButton in myDButtonList1)
+            if (myNumList1.Count == 10)
             {
-                myButton.BackColor = Color.White;
+                tbBingoNumber.Text = "";
+                myNumList1.Clear();
+                foreach (Button myButton in myDButtonList1)
+                {
+                    myButton.BackColor = Color.White;
+                }
+            }
+            else
+            {
+                MessageBox.Show("請選擇10個數字");
             }
         }
 
@@ -251,24 +284,54 @@ namespace Lottery
             {
                 myButton.BackColor = Color.White;
             }
-            
         }
 
         private void btnBigAuto_Click(object sender, EventArgs e)
         {
             Random R = new Random();
-            //tbBingoNumber.Text = "";
-            myNumList2.Clear();
             string strNum = "";
-            do
+            int Count = 0;
+
+            foreach (Button myButton in myDButtonList2)
             {
-                int Number = R.Next(1, 49);
+                if (myButton.BackColor == Color.Orange)
+                {
+                    myButton.BackColor = Color.White;
+                    myNumList2.Remove(Convert.ToInt32(myButton.Text));
+                } else if (myButton.BackColor == Color.Red)
+                {
+                    Count++;
+                }
+            }
+
+            if (Count == 6)
+            {
+                MessageBox.Show("請選擇小於6個數字");
+            }
+            else if (myNumList2.Count == 6)
+            {
+                myNumList2.Clear();
+            }
+
+            while (myNumList2.Count < 6)
+            {
+                int Number = R.Next(1, 50);
                 if (myNumList2.IndexOf(Number) < 0)
                 {
                     myNumList2.Add(Number);
                 }
+            }
 
-            } while (myNumList2.Count < 6);
+            foreach (int myNum in myNumList2)
+            {
+                foreach (Button myButton in myDButtonList2)
+                {
+                    if (myButton.Text == myNum.ToString() && myButton.BackColor != Color.Red)
+                    {
+                        myButton.BackColor = Color.Orange;
+                    }
+                }
+            }
 
             myNumList2.Sort();
 
@@ -276,20 +339,24 @@ namespace Lottery
             {
                 strNum += string.Format("{0:D2}, ", myList);
             }
-            tbBigNumber.Text = strNum;
 
-            myNumList2.Clear();
+            tbBigNumber.Text = strNum;
         }
 
         private void btnBigConfirm_Click(object sender, EventArgs e)
         {
-            tbBigNumber.Text = "";
-
-
-            myNumList2.Clear();
-            foreach (Button myButton in myDButtonList2)
+            if (myNumList2.Count == 6)
             {
-                myButton.BackColor = Color.White;
+                tbBigNumber.Text = "";
+                myNumList2.Clear();
+                foreach (Button myButton in myDButtonList2)
+                {
+                    myButton.BackColor = Color.White;
+                }
+            }
+            else
+            {
+                MessageBox.Show("請選擇6個數字");
             }
         }
 
@@ -305,11 +372,9 @@ namespace Lottery
 
         private void btn539Auto_Click(object sender, EventArgs e)
         {
-            Random R = new Random();
-            
-                //tbBingoNumber.Text = "";
-                //myNumList3.Clear();
-                string strNum = "";
+            Random R = new Random();            
+            string strNum = "";
+            int Count = 0;
             
             foreach (Button myButton in myDButtonList3)
             {
@@ -317,23 +382,27 @@ namespace Lottery
                 {
                     myButton.BackColor = Color.White;
                     myNumList3.Remove(Convert.ToInt32(myButton.Text));
+                } else if (myButton.BackColor == Color.Red)
+                {
+                    Count++;
                 }
             }
-            
 
-            if (myNumList3.Count == 5)
+            if (Count == 5)
+            {
+                MessageBox.Show("請選擇小於5個數字");
+            } else if (myNumList3.Count == 5)
             {
                 myNumList3.Clear();
             }
             
             while (myNumList3.Count < 5)
             {
-                int Number = R.Next(1, 39);
+                int Number = R.Next(1, 40);
                 if (myNumList3.IndexOf(Number) < 0)
                 {
                     myNumList3.Add(Number);
                 }
-
             }
 
             foreach (int myNum in myNumList3)
@@ -347,16 +416,14 @@ namespace Lottery
                 }
             }
             
-
             myNumList3.Sort();
 
             foreach (int myList in myNumList3)
             {
                 strNum += string.Format("{0:D2}, ", myList);
             }
-            tb539Number.Text = strNum;
 
-            //myNumList3.Clear();
+            tb539Number.Text = strNum;
         }
 
         private void btn539Confirm_Click(object sender, EventArgs e)
@@ -364,8 +431,6 @@ namespace Lottery
             if (myNumList3.Count == 5)
             {
                 tb539Number.Text = "";
-
-
                 myNumList3.Clear();
                 foreach (Button myButton in myDButtonList3)
                 {
@@ -374,8 +439,7 @@ namespace Lottery
             } else
             {
                 MessageBox.Show("請選擇5個數字");
-            }
-            
+            }           
         }
 
         private void btn539Reset_Click(object sender, EventArgs e)

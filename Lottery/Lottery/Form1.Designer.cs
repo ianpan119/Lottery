@@ -272,7 +272,7 @@
             this.btnBingoReset.Name = "btnBingoReset";
             this.btnBingoReset.Size = new System.Drawing.Size(145, 68);
             this.btnBingoReset.TabIndex = 0;
-            this.btnBingoReset.Text = "重選";
+            this.btnBingoReset.Text = "清空";
             this.btnBingoReset.UseVisualStyleBackColor = true;
             this.btnBingoReset.Click += new System.EventHandler(this.btnBingoReset_Click);
             // 
@@ -431,7 +431,7 @@
             this.btnBigReset.Name = "btnBigReset";
             this.btnBigReset.Size = new System.Drawing.Size(145, 68);
             this.btnBigReset.TabIndex = 10;
-            this.btnBigReset.Text = "重選";
+            this.btnBigReset.Text = "清空";
             this.btnBigReset.UseVisualStyleBackColor = true;
             this.btnBigReset.Click += new System.EventHandler(this.btnBigReset_Click);
             // 
@@ -464,7 +464,7 @@
             this.btn539Reset.Name = "btn539Reset";
             this.btn539Reset.Size = new System.Drawing.Size(145, 68);
             this.btn539Reset.TabIndex = 11;
-            this.btn539Reset.Text = "重選";
+            this.btn539Reset.Text = "清空";
             this.btn539Reset.UseVisualStyleBackColor = true;
             this.btn539Reset.Click += new System.EventHandler(this.btn539Reset_Click);
             // 
