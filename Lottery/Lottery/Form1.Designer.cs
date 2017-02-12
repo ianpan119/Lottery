@@ -54,14 +54,14 @@
             this.btnBingoAuto = new System.Windows.Forms.Button();
             this.tbBingoNumber = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
+            this.tbBigNumber = new System.Windows.Forms.TextBox();
+            this.tb539Number = new System.Windows.Forms.TextBox();
+            this.btnBigAuto = new System.Windows.Forms.Button();
+            this.btnBigReset = new System.Windows.Forms.Button();
+            this.btnBigConfirm = new System.Windows.Forms.Button();
+            this.btn539Auto = new System.Windows.Forms.Button();
+            this.btn539Reset = new System.Windows.Forms.Button();
+            this.btn539Confirm = new System.Windows.Forms.Button();
             this.tabPage3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -74,10 +74,10 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.DarkGray;
-            this.tabPage3.Controls.Add(this.button15);
-            this.tabPage3.Controls.Add(this.button14);
-            this.tabPage3.Controls.Add(this.button13);
-            this.tabPage3.Controls.Add(this.textBox2);
+            this.tabPage3.Controls.Add(this.btn539Confirm);
+            this.tabPage3.Controls.Add(this.btn539Reset);
+            this.tabPage3.Controls.Add(this.btn539Auto);
+            this.tabPage3.Controls.Add(this.tb539Number);
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -161,10 +161,10 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tabPage2.Controls.Add(this.button10);
-            this.tabPage2.Controls.Add(this.button12);
-            this.tabPage2.Controls.Add(this.button11);
-            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.btnBigConfirm);
+            this.tabPage2.Controls.Add(this.btnBigReset);
+            this.tabPage2.Controls.Add(this.btnBigAuto);
+            this.tabPage2.Controls.Add(this.tbBigNumber);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -393,85 +393,91 @@
             this.tabControl1.Size = new System.Drawing.Size(1044, 675);
             this.tabControl1.TabIndex = 0;
             // 
-            // textBox1
+            // tbBigNumber
             // 
-            this.textBox1.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(67, 506);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(565, 47);
-            this.textBox1.TabIndex = 8;
+            this.tbBigNumber.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tbBigNumber.Location = new System.Drawing.Point(67, 506);
+            this.tbBigNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.tbBigNumber.Name = "tbBigNumber";
+            this.tbBigNumber.ReadOnly = true;
+            this.tbBigNumber.Size = new System.Drawing.Size(565, 47);
+            this.tbBigNumber.TabIndex = 8;
             // 
-            // textBox2
+            // tb539Number
             // 
-            this.textBox2.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox2.Location = new System.Drawing.Point(67, 506);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(565, 47);
-            this.textBox2.TabIndex = 9;
+            this.tb539Number.Font = new System.Drawing.Font("微軟正黑體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb539Number.Location = new System.Drawing.Point(67, 506);
+            this.tb539Number.Margin = new System.Windows.Forms.Padding(4);
+            this.tb539Number.Name = "tb539Number";
+            this.tb539Number.ReadOnly = true;
+            this.tb539Number.Size = new System.Drawing.Size(565, 47);
+            this.tb539Number.TabIndex = 9;
             // 
-            // button11
+            // btnBigAuto
             // 
-            this.button11.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.button11.Location = new System.Drawing.Point(67, 558);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(145, 68);
-            this.button11.TabIndex = 9;
-            this.button11.Text = "自動選號";
-            this.button11.UseVisualStyleBackColor = true;
+            this.btnBigAuto.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBigAuto.Location = new System.Drawing.Point(67, 558);
+            this.btnBigAuto.Name = "btnBigAuto";
+            this.btnBigAuto.Size = new System.Drawing.Size(145, 68);
+            this.btnBigAuto.TabIndex = 9;
+            this.btnBigAuto.Text = "自動選號";
+            this.btnBigAuto.UseVisualStyleBackColor = true;
+            this.btnBigAuto.Click += new System.EventHandler(this.btnBigAuto_Click);
             // 
-            // button12
+            // btnBigReset
             // 
-            this.button12.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.button12.Location = new System.Drawing.Point(487, 558);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(145, 68);
-            this.button12.TabIndex = 10;
-            this.button12.Text = "重選";
-            this.button12.UseVisualStyleBackColor = true;
+            this.btnBigReset.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBigReset.Location = new System.Drawing.Point(487, 558);
+            this.btnBigReset.Name = "btnBigReset";
+            this.btnBigReset.Size = new System.Drawing.Size(145, 68);
+            this.btnBigReset.TabIndex = 10;
+            this.btnBigReset.Text = "重選";
+            this.btnBigReset.UseVisualStyleBackColor = true;
+            this.btnBigReset.Click += new System.EventHandler(this.btnBigReset_Click);
             // 
-            // button10
+            // btnBigConfirm
             // 
-            this.button10.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.button10.Location = new System.Drawing.Point(277, 558);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(145, 68);
-            this.button10.TabIndex = 11;
-            this.button10.Text = "儲存";
-            this.button10.UseVisualStyleBackColor = true;
+            this.btnBigConfirm.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBigConfirm.Location = new System.Drawing.Point(277, 558);
+            this.btnBigConfirm.Name = "btnBigConfirm";
+            this.btnBigConfirm.Size = new System.Drawing.Size(145, 68);
+            this.btnBigConfirm.TabIndex = 11;
+            this.btnBigConfirm.Text = "儲存";
+            this.btnBigConfirm.UseVisualStyleBackColor = true;
+            this.btnBigConfirm.Click += new System.EventHandler(this.btnBigConfirm_Click);
             // 
-            // button13
+            // btn539Auto
             // 
-            this.button13.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.button13.Location = new System.Drawing.Point(67, 558);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(145, 68);
-            this.button13.TabIndex = 10;
-            this.button13.Text = "自動選號";
-            this.button13.UseVisualStyleBackColor = true;
+            this.btn539Auto.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btn539Auto.Location = new System.Drawing.Point(67, 558);
+            this.btn539Auto.Name = "btn539Auto";
+            this.btn539Auto.Size = new System.Drawing.Size(145, 68);
+            this.btn539Auto.TabIndex = 10;
+            this.btn539Auto.Text = "自動選號";
+            this.btn539Auto.UseVisualStyleBackColor = true;
+            this.btn539Auto.Click += new System.EventHandler(this.btn539Auto_Click);
             // 
-            // button14
+            // btn539Reset
             // 
-            this.button14.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.button14.Location = new System.Drawing.Point(487, 558);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(145, 68);
-            this.button14.TabIndex = 11;
-            this.button14.Text = "重選";
-            this.button14.UseVisualStyleBackColor = true;
+            this.btn539Reset.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btn539Reset.Location = new System.Drawing.Point(487, 558);
+            this.btn539Reset.Name = "btn539Reset";
+            this.btn539Reset.Size = new System.Drawing.Size(145, 68);
+            this.btn539Reset.TabIndex = 11;
+            this.btn539Reset.Text = "重選";
+            this.btn539Reset.UseVisualStyleBackColor = true;
+            this.btn539Reset.Click += new System.EventHandler(this.btn539Reset_Click);
             // 
-            // button15
+            // btn539Confirm
             // 
-            this.button15.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.button15.Location = new System.Drawing.Point(277, 558);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(145, 68);
-            this.button15.TabIndex = 12;
-            this.button15.Text = "儲存";
-            this.button15.UseVisualStyleBackColor = true;
+            this.btn539Confirm.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btn539Confirm.Location = new System.Drawing.Point(277, 558);
+            this.btn539Confirm.Name = "btn539Confirm";
+            this.btn539Confirm.Size = new System.Drawing.Size(145, 68);
+            this.btn539Confirm.TabIndex = 12;
+            this.btn539Confirm.Text = "儲存";
+            this.btn539Confirm.UseVisualStyleBackColor = true;
+            this.btn539Confirm.Click += new System.EventHandler(this.btn539Confirm_Click);
             // 
             // Form1
             // 
@@ -526,14 +532,14 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.TextBox tb539Number;
+        private System.Windows.Forms.TextBox tbBigNumber;
+        private System.Windows.Forms.Button btn539Confirm;
+        private System.Windows.Forms.Button btn539Reset;
+        private System.Windows.Forms.Button btn539Auto;
+        private System.Windows.Forms.Button btnBigConfirm;
+        private System.Windows.Forms.Button btnBigReset;
+        private System.Windows.Forms.Button btnBigAuto;
     }
 }
 

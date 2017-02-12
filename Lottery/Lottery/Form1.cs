@@ -15,11 +15,11 @@ namespace Lottery
         List<Button> myDButtonList1 = new List<Button>();
         List<Button> myDButtonList2 = new List<Button>();
         List<Button> myDButtonList3 = new List<Button>();
-        List<int> myNumList1;
-        List<int> myNumList2;
-        List<int> myNumList3;
+        List<int> myNumList1 = new List<int>();
+        List<int> myNumList2 = new List<int>();
+        List<int> myNumList3 = new List<int>();
         List<int> myNumTemp = new List<int>();
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -27,118 +27,113 @@ namespace Lottery
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            generate_dButton(8, 10, tabPage1, myDButtonList1);
-            generate_dButton(7, 7, tabPage2, myDButtonList2);
-            generate_dButton(5, 8, tabPage3, myDButtonList3);
-
+            generate_Bingo_dButton(8, 10);
+            generate_Big_dButton(7, 7);
+            generate_539_dButton(5, 8);
         }
 
-        private void dButton_Click(object sender, EventArgs e)
+        private void dButton_Bingo_Click(object sender, EventArgs e)
         {
-            Button myButton = (Button)sender;
-            //myNumTemp = new List<int>();
-            //tbBingoNumber.Text = "";
-            string strNum = "";
-
-            if (myButton.BackColor == Color.White)
-            {
-                if (myNumTemp.Count == 10)
-                {
-                    MessageBox.Show("數量超出10位");
-                }
-                else
-                {
-                    myButton.BackColor = Color.Red;
-                    myNumTemp.Add(Convert.ToInt32(myButton.Text));
-                }
-            } else
-            {
-                myButton.BackColor = Color.White;
-                myNumTemp.Remove(Convert.ToInt32(myButton.Text));                   
-            }
-
-            foreach (int myNum in myNumTemp)
-            {
-                strNum += myNum + ", ";
-            }
-            tbBingoNumber.Text = strNum;
             
-            //MessageBox.Show(string.Format("{0}", myButton.Name));
         }
 
-        private void generate_dButton(int row, int col, TabPage pageNum, List<Button> myDButton)
+        private void dButton_Big_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dButton_539_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generate_Bingo_dButton(int row, int col)
         {
             int Num = 1;
-            myDButton = new List<Button>();
-            int intSPointi = 0;
-            int intSPointj = 0;
-            int intSpace = 0;
-            int intSize = 0;
-            if (pageNum == tabPage1)
-            {
-                intSPointi = 20;
-                intSPointj = 40;
-                intSpace = 45;
-                intSize = 45;
-            } else if (pageNum == tabPage2)
-            {
-                intSPointi = 20;
-                intSPointj = 70;
-                intSpace = 50;
-                intSize = 50;
-            } else
-            {
-                intSPointi = 20;
-                intSPointj = 20;
-                intSpace = 60;
-                intSize = 60;
-            }
-
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
                 {
                     Button dButton = new Button();
-                    
+
                     dButton.BackColor = Color.White;
                     dButton.ForeColor = Color.Black;
-                    dButton.Location = new Point(intSPointj + intSpace * j, intSPointi + intSpace * i);
-                    dButton.Size = new Size(intSize, intSize);
+                    dButton.Location = new Point(40 + 45 * j, 20 + 45 * i);
+                    dButton.Size = new Size(45, 45);
                     dButton.Text = Num.ToString();
-                    dButton.Name = "btn" + pageNum + Num.ToString();
-                    dButton.Tag = pageNum;
+                    dButton.Name = "btn" + "Bingo" + Num.ToString();
                     dButton.Font = new Font("微軟正黑體", 12);
-                    dButton.Click += new EventHandler(dButton_Click);
+                    dButton.Click += new EventHandler(dButton_Bingo_Click);
 
                     Num++;
-                    pageNum.Controls.Add(dButton);
-                    pageNum.Visible = true;
-                    myDButton.Add(dButton);
+                    tabPage1.Controls.Add(dButton);
+                    
+                    myDButtonList1.Add(dButton);
 
-                    if (pageNum == tabPage3 && Num == 40) break;
                 }
             }
-
         }
 
-        private void btnBingoConfirm_Click(object sender, EventArgs e)
+        private void generate_Big_dButton(int row, int col)
         {
-            tbBingoNumber.Text = "";
+            int Num = 1;
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    Button dButton = new Button();
+
+                    dButton.BackColor = Color.White;
+                    dButton.ForeColor = Color.Black;
+                    dButton.Location = new Point(70 + 50 * j, 20 + 50 * i);
+                    dButton.Size = new Size(50, 50);
+                    dButton.Text = Num.ToString();
+                    dButton.Name = "btn" + "Big" + Num.ToString();
+                    dButton.Font = new Font("微軟正黑體", 12);
+                    dButton.Click += new EventHandler(dButton_Big_Click);
+
+                    Num++;
+                    tabPage2.Controls.Add(dButton);
+
+                    myDButtonList2.Add(dButton);
+
+                }
+            }
         }
 
-        private void btnBingoReset_Click(object sender, EventArgs e)
+        private void generate_539_dButton(int row, int col)
         {
-            tbBingoNumber.Text = "";
-            myNumTemp.Clear();
+            int Num = 1;
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    Button dButton = new Button();
+
+                    dButton.BackColor = Color.White;
+                    dButton.ForeColor = Color.Black;
+                    dButton.Location = new Point(20 + 60 * j, 20 + 60 * i);
+                    dButton.Size = new Size(60, 60);
+                    dButton.Text = Num.ToString();
+                    dButton.Name = "btn" + "539" + Num.ToString();
+                    dButton.Font = new Font("微軟正黑體", 12);
+                    dButton.Click += new EventHandler(dButton_539_Click);
+
+                    Num++;
+                    tabPage3.Controls.Add(dButton);
+
+                    myDButtonList3.Add(dButton);
+
+                    if (Num == 40) break;
+                }
+            }
         }
 
         private void btnBingoAuto_Click(object sender, EventArgs e)
         {
             Random R = new Random();
-            //tbBingoNumber.Text = "";
-            myNumList1 = new List<int>();
+            myNumList1.Clear();
             string strNum = "";
-
             do
             {
                 int Number = R.Next(1, 81);
@@ -153,10 +148,102 @@ namespace Lottery
 
             foreach (int myList in myNumList1)
             {
-                strNum += myList.ToString() + ", ";
+                strNum += string.Format("{0:D2}, ", myList);
             }
-            tbBingoNumber.Text = strNum;
+            tbBingoNumber.Text = strNum;          
         }
-                        
+
+        private void btnBingoConfirm_Click(object sender, EventArgs e)
+        {
+            tbBingoNumber.Text = "";
+
+
+            myNumTemp.Clear();
+        }
+
+        private void btnBingoReset_Click(object sender, EventArgs e)
+        {
+            tbBingoNumber.Text = "";
+            myNumTemp.Clear();
+        }
+
+        private void btnBigAuto_Click(object sender, EventArgs e)
+        {
+            Random R = new Random();
+            //tbBingoNumber.Text = "";
+            myNumList2.Clear();
+            string strNum = "";
+            do
+            {
+                int Number = R.Next(1, 49);
+                if (myNumList2.IndexOf(Number) < 0)
+                {
+                    myNumList2.Add(Number);
+                }
+
+            } while (myNumList2.Count < 6);
+
+            myNumList2.Sort();
+
+            foreach (int myList in myNumList2)
+            {
+                strNum += string.Format("{0:D2}, ", myList);
+            }
+            tbBigNumber.Text = strNum;
+        }
+
+        private void btnBigConfirm_Click(object sender, EventArgs e)
+        {
+            tbBigNumber.Text = "";
+
+
+            myNumTemp.Clear();
+        }
+
+        private void btnBigReset_Click(object sender, EventArgs e)
+        {
+            tbBigNumber.Text = "";
+            myNumTemp.Clear();
+        }
+
+        private void btn539Auto_Click(object sender, EventArgs e)
+        {
+            Random R = new Random();
+            //tbBingoNumber.Text = "";
+            myNumList3.Clear();
+            string strNum = "";
+            do
+            {
+                int Number = R.Next(1, 39);
+                if (myNumList3.IndexOf(Number) < 0)
+                {
+                    myNumList3.Add(Number);
+                }
+
+            } while (myNumList3.Count < 5);
+
+            myNumList3.Sort();
+
+            foreach (int myList in myNumList3)
+            {
+                strNum += string.Format("{0:D2}, ", myList);
+            }
+            tb539Number.Text = strNum;
+        }
+
+        private void btn539Confirm_Click(object sender, EventArgs e)
+        {
+            tbBingoNumber.Text = "";
+
+
+            myNumTemp.Clear();
+        }
+
+        private void btn539Reset_Click(object sender, EventArgs e)
+        {
+            tbBingoNumber.Text = "";
+            myNumTemp.Clear();
+        }
+
     }
 }
