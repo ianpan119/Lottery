@@ -34,17 +34,90 @@ namespace Lottery
 
         private void dButton_Bingo_Click(object sender, EventArgs e)
         {
-            
+            Button myButton = (Button)sender;
+            string strNum = "";
+            if (myButton.BackColor == Color.White)
+            {
+                if (myNumList1.Count == 10)
+                {
+                    MessageBox.Show("請選擇10個數字");
+                } else
+                {
+                    myButton.BackColor = Color.Red;
+                    myNumList1.Add(Convert.ToInt32(myButton.Text));
+                }
+                
+            } else
+            {
+                myButton.BackColor = Color.White;
+                myNumList1.Remove(Convert.ToInt32(myButton.Text));
+            }
+
+            foreach (int myNum in myNumList1)
+            {
+                strNum += string.Format("{0:D2}, ", myNum);
+            }
+            tbBingoNumber.Text = strNum;
         }
 
         private void dButton_Big_Click(object sender, EventArgs e)
         {
+            Button myButton = (Button)sender;
+            string strNum = "";
+            if (myButton.BackColor == Color.White)
+            {
+                if (myNumList2.Count == 6)
+                {
+                    MessageBox.Show("請選擇6個數字");
+                }
+                else
+                {
+                    myButton.BackColor = Color.Red;
+                    myNumList2.Add(Convert.ToInt32(myButton.Text));
+                }
 
+            }
+            else
+            {
+                myButton.BackColor = Color.White;
+                myNumList2.Remove(Convert.ToInt32(myButton.Text));
+            }
+
+            foreach (int myNum in myNumList2)
+            {
+                strNum += string.Format("{0:D2}, ", myNum);
+            }
+            tbBigNumber.Text = strNum;
         }
 
         private void dButton_539_Click(object sender, EventArgs e)
         {
+            Button myButton = (Button)sender;
+            string strNum = "";
+            if (myButton.BackColor == Color.White)
+            {
+                if (myNumList3.Count == 5)
+                {
+                    MessageBox.Show("請選擇5個數字");
+                }
+                else
+                {
+                    myButton.BackColor = Color.Red;
+                    myNumList3.Add(Convert.ToInt32(myButton.Text));
+                }
 
+            }
+            else
+            {
+                myButton.BackColor = Color.White;
+                myNumList3.Remove(Convert.ToInt32(myButton.Text));
+            }
+
+            foreach (int myNum in myNumList3)
+            {
+                strNum += string.Format("{0:D2}, ", myNum);
+            }
+            tb539Number.Text = strNum;
         }
 
         private void generate_Bingo_dButton(int row, int col)
@@ -150,7 +223,9 @@ namespace Lottery
             {
                 strNum += string.Format("{0:D2}, ", myList);
             }
-            tbBingoNumber.Text = strNum;          
+            tbBingoNumber.Text = strNum;
+
+            myNumList1.Clear();
         }
 
         private void btnBingoConfirm_Click(object sender, EventArgs e)
@@ -158,13 +233,13 @@ namespace Lottery
             tbBingoNumber.Text = "";
 
 
-            myNumTemp.Clear();
+            myNumList1.Clear();
         }
 
         private void btnBingoReset_Click(object sender, EventArgs e)
         {
             tbBingoNumber.Text = "";
-            myNumTemp.Clear();
+            myNumList1.Clear();
         }
 
         private void btnBigAuto_Click(object sender, EventArgs e)
@@ -190,6 +265,8 @@ namespace Lottery
                 strNum += string.Format("{0:D2}, ", myList);
             }
             tbBigNumber.Text = strNum;
+
+            myNumList2.Clear();
         }
 
         private void btnBigConfirm_Click(object sender, EventArgs e)
@@ -197,13 +274,13 @@ namespace Lottery
             tbBigNumber.Text = "";
 
 
-            myNumTemp.Clear();
+            myNumList2.Clear();
         }
 
         private void btnBigReset_Click(object sender, EventArgs e)
         {
             tbBigNumber.Text = "";
-            myNumTemp.Clear();
+            myNumList2.Clear();
         }
 
         private void btn539Auto_Click(object sender, EventArgs e)
@@ -229,6 +306,8 @@ namespace Lottery
                 strNum += string.Format("{0:D2}, ", myList);
             }
             tb539Number.Text = strNum;
+
+            myNumList3.Clear();
         }
 
         private void btn539Confirm_Click(object sender, EventArgs e)
@@ -236,13 +315,13 @@ namespace Lottery
             tbBingoNumber.Text = "";
 
 
-            myNumTemp.Clear();
+            myNumList3.Clear();
         }
 
         private void btn539Reset_Click(object sender, EventArgs e)
         {
             tbBingoNumber.Text = "";
-            myNumTemp.Clear();
+            myNumList3.Clear();
         }
 
     }
