@@ -107,12 +107,12 @@ namespace Lottery
                 }
 
             }
-            else
+            else 
             {
                 myButton.BackColor = Color.White;
                 myNumList3.Remove(Convert.ToInt32(myButton.Text));
             }
-
+            myNumList3.Sort();
             foreach (int myNum in myNumList3)
             {
                 strNum += string.Format("{0:D2}, ", myNum);
@@ -207,6 +207,9 @@ namespace Lottery
             Random R = new Random();
             myNumList1.Clear();
             string strNum = "";
+            Console.WriteLine(sender);
+            
+
             do
             {
                 int Number = R.Next(1, 81);
@@ -234,12 +237,21 @@ namespace Lottery
 
 
             myNumList1.Clear();
+            foreach (Button myButton in myDButtonList1)
+            {
+                myButton.BackColor = Color.White;
+            }
         }
 
         private void btnBingoReset_Click(object sender, EventArgs e)
         {
             tbBingoNumber.Text = "";
             myNumList1.Clear();
+            foreach (Button myButton in myDButtonList1)
+            {
+                myButton.BackColor = Color.White;
+            }
+            
         }
 
         private void btnBigAuto_Click(object sender, EventArgs e)
@@ -275,21 +287,46 @@ namespace Lottery
 
 
             myNumList2.Clear();
+            foreach (Button myButton in myDButtonList2)
+            {
+                myButton.BackColor = Color.White;
+            }
         }
 
         private void btnBigReset_Click(object sender, EventArgs e)
         {
             tbBigNumber.Text = "";
             myNumList2.Clear();
+            foreach (Button myButton in myDButtonList2)
+            {
+                myButton.BackColor = Color.White;
+            }
         }
 
         private void btn539Auto_Click(object sender, EventArgs e)
         {
             Random R = new Random();
-            //tbBingoNumber.Text = "";
-            myNumList3.Clear();
-            string strNum = "";
-            do
+            
+                //tbBingoNumber.Text = "";
+                //myNumList3.Clear();
+                string strNum = "";
+            
+            foreach (Button myButton in myDButtonList3)
+            {
+                if (myButton.BackColor == Color.Orange)
+                {
+                    myButton.BackColor = Color.White;
+                    myNumList3.Remove(Convert.ToInt32(myButton.Text));
+                }
+            }
+            
+
+            if (myNumList3.Count == 5)
+            {
+                myNumList3.Clear();
+            }
+            
+            while (myNumList3.Count < 5)
             {
                 int Number = R.Next(1, 39);
                 if (myNumList3.IndexOf(Number) < 0)
@@ -297,7 +334,19 @@ namespace Lottery
                     myNumList3.Add(Number);
                 }
 
-            } while (myNumList3.Count < 5);
+            }
+
+            foreach (int myNum in myNumList3)
+            {
+                foreach (Button myButton in myDButtonList3)
+                {
+                    if (myButton.Text == myNum.ToString() && myButton.BackColor != Color.Red)
+                    {
+                        myButton.BackColor = Color.Orange;
+                    }
+                }
+            }
+            
 
             myNumList3.Sort();
 
@@ -307,21 +356,36 @@ namespace Lottery
             }
             tb539Number.Text = strNum;
 
-            myNumList3.Clear();
+            //myNumList3.Clear();
         }
 
         private void btn539Confirm_Click(object sender, EventArgs e)
         {
-            tbBingoNumber.Text = "";
+            if (myNumList3.Count == 5)
+            {
+                tb539Number.Text = "";
 
 
-            myNumList3.Clear();
+                myNumList3.Clear();
+                foreach (Button myButton in myDButtonList3)
+                {
+                    myButton.BackColor = Color.White;
+                }
+            } else
+            {
+                MessageBox.Show("請選擇5個數字");
+            }
+            
         }
 
         private void btn539Reset_Click(object sender, EventArgs e)
         {
-            tbBingoNumber.Text = "";
+            tb539Number.Text = "";
             myNumList3.Clear();
+            foreach (Button myButton in myDButtonList3)
+            {
+                myButton.BackColor = Color.White;
+            }
         }
 
     }
