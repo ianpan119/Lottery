@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Lottery
 {
     public partial class Form1 : Form
     {
+        SqlConnectionStringBuilder scsb;
         List<Button> myDButtonList1 = new List<Button>();
         List<Button> myDButtonList2 = new List<Button>();
         List<Button> myDButtonList3 = new List<Button>();
@@ -30,6 +32,14 @@ namespace Lottery
             generate_Bingo_dButton(8, 10);
             generate_Big_dButton(7, 7);
             generate_539_dButton(5, 8);
+            scsb = new SqlConnectionStringBuilder();
+            scsb.DataSource = @"IAN-PC\MSSQLSERVER16";
+            scsb.InitialCatalog = "csharp1";
+            scsb.IntegratedSecurity = true;
+            scsb.UserID = "";
+            update_listbox("BingoBingo", lboxBingo);
+            update_listbox("BigBingo", lboxBig);
+            update_listbox("539", lbox539);
         }
 
         private void dButton_Bingo_Click(object sender, EventArgs e)
@@ -274,6 +284,8 @@ namespace Lottery
             {
                 MessageBox.Show("請選擇10個數字");
             }
+
+            update_listbox("BingoBingo", lboxBingo);
         }
 
         private void btnBingoReset_Click(object sender, EventArgs e)
@@ -436,10 +448,12 @@ namespace Lottery
                 {
                     myButton.BackColor = Color.White;
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("請選擇5個數字");
-            }           
+            }
+
         }
 
         private void btn539Reset_Click(object sender, EventArgs e)
@@ -452,5 +466,56 @@ namespace Lottery
             }
         }
 
+        private void update_listbox(string lottery, ListBox myListBox)
+        {
+            myListBox.Items.Clear();
+            SqlConnection con = new SqlConnection(scsb.ToString());
+            con.Open();
+            string strSQL = string.Format("select * from lottery where 彩券類型 = '{0}';", lottery);
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            
+            int count = 1;
+
+            switch (lottery)
+            {
+                case "BingoBingo":
+                    while (reader.Read())
+                    {
+                        myListBox.Items.Add(string.Format("{0:D2}: {1:D2},{2:D2},{3:D2},{4:D2},{5:D2},{6:D2},{7:D2},{8:D2},{9:D2},{10:D2}",
+                            count, reader["號碼1"], reader["號碼2"], reader["號碼3"], reader["號碼4"], reader["號碼5"],
+                            reader["號碼6"], reader["號碼7"], reader["號碼8"], reader["號碼9"], reader["號碼10"]));
+                        count++;
+                    }
+                    break;
+                case "BigBingo":
+                    while (reader.Read())
+                    {
+                        myListBox.Items.Add(string.Format("{0:D2}: {1:D2},{2:D2},{3:D2},{4:D2},{5:D2},{6:D2}",
+                            count, reader["號碼1"], reader["號碼2"], reader["號碼3"], 
+                            reader["號碼4"], reader["號碼5"], reader["號碼6"]));
+                        count++;
+                    }
+                    break;
+                case "539":
+                    while (reader.Read())
+                    {
+                        myListBox.Items.Add(string.Format("{0:D2}: {1:D2},{2:D2},{3:D2},{4:D2},{5:D2}",
+                            count, reader["號碼1"], reader["號碼2"], reader["號碼3"], reader["號碼4"], reader["號碼5"]));
+                        count++;
+                    }
+                    break;
+            }
+
+            
+            
+            reader.Close();
+            con.Close();                                   
+        }
+
+        private void insert_values(string lottery)
+        {
+
+        }
     }
 }
