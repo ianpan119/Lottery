@@ -20,8 +20,7 @@ namespace Lottery
         List<int> myNumList1 = new List<int>();
         List<int> myNumList2 = new List<int>();
         List<int> myNumList3 = new List<int>();
-        List<int> myNumTemp = new List<int>();
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -537,15 +536,15 @@ namespace Lottery
             SqlCommand cmd = new SqlCommand(strSQL, con);
             SqlDataReader reader = cmd.ExecuteReader();
             
-            int count = 1;
+            int count = 0;
 
             switch (lottery)
             {
                 case "BingoBingo":
                     while (reader.Read())
                     {
-                        myListBox.Items.Add(string.Format("{0:D2}: {1:D2},{2:D2},{3:D2},{4:D2},{5:D2},{6:D2},{7:D2},{8:D2},{9:D2},{10:D2}",
-                            count, reader["號碼1"], reader["號碼2"], reader["號碼3"], reader["號碼4"], reader["號碼5"],
+                        myListBox.Items.Add(string.Format("{0:D2}-{1:D2},{2:D2},{3:D2},{4:D2},{5:D2},{6:D2},{7:D2},{8:D2},{9:D2},{10:D2}",
+                            reader["id"], reader["號碼1"], reader["號碼2"], reader["號碼3"], reader["號碼4"], reader["號碼5"],
                             reader["號碼6"], reader["號碼7"], reader["號碼8"], reader["號碼9"], reader["號碼10"]));
                         count++;
                     }
@@ -553,8 +552,8 @@ namespace Lottery
                 case "BigBingo":
                     while (reader.Read())
                     {
-                        myListBox.Items.Add(string.Format("{0:D2}: {1:D2},{2:D2},{3:D2},{4:D2},{5:D2},{6:D2}",
-                            count, reader["號碼1"], reader["號碼2"], reader["號碼3"], 
+                        myListBox.Items.Add(string.Format("{0:D2}-{1:D2},{2:D2},{3:D2},{4:D2},{5:D2},{5:D2}",
+                            reader["id"], reader["號碼1"], reader["號碼2"], reader["號碼3"], 
                             reader["號碼4"], reader["號碼5"], reader["號碼6"]));
                         count++;
                     }
@@ -562,19 +561,75 @@ namespace Lottery
                 case "539":
                     while (reader.Read())
                     {
-                        myListBox.Items.Add(string.Format("{0:D2}: {1:D2},{2:D2},{3:D2},{4:D2},{5:D2}",
-                            count, reader["號碼1"], reader["號碼2"], reader["號碼3"], reader["號碼4"], reader["號碼5"]));
+                        myListBox.Items.Add(string.Format("{0:D2}-{1:D2},{2:D2},{3:D2},{4:D2},{5:D2}",
+                            reader["id"], reader["號碼1"], reader["號碼2"], reader["號碼3"], reader["號碼4"], reader["號碼5"]));
                         count++;
                     }
                     break;
-            }            
+            }
+            myListBox.Items.Insert(0, "總共" + count + "筆");
             reader.Close();
             con.Close();                                   
         }
 
+        private void delete_listbox(string lottery, ListBox myListBox)
+        {
+            int index = myListBox.SelectedIndex;
+            
+            if (index > 0)
+            {
+                DialogResult R;
+                R = MessageBox.Show("是否刪除資料?", "刪除資料", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (R == DialogResult.Yes)
+                {
+                    string s = (string)myListBox.Items[index];
+                    string[] sArray = (s.Split('-', ' ', ','));
+                    SqlConnection con = new SqlConnection(scsb.ToString());
+                    con.Open();
+                    string strSQL = string.Format("delete from myLottery where id = '{0}';", sArray[0]);
+                    SqlCommand cmd = new SqlCommand(strSQL, con);
+                    cmd.Parameters.AddWithValue("@OldNum", sArray[0]);
+
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("資料刪除成功", "刪除資料");
+
+                    update_listbox(lottery, myListBox);
+                }
+            }
+            else
+            {
+                MessageBox.Show("請選擇正確的筆數");
+            }
+        }
+
+        private void clear_listbox(string lottery, ListBox myListBox)
+        {
+            DialogResult R;
+            R = MessageBox.Show("是否清除所有資料?", "清除資料",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (R == DialogResult.Yes)
+            {                
+                SqlConnection con = new SqlConnection(scsb.ToString());
+                con.Open();
+                string strSQL = string.Format("delete from myLottery where 彩券 = '{0}';", lottery);
+                SqlCommand cmd = new SqlCommand(strSQL, con);
+                cmd.Parameters.AddWithValue("@OldLottery", lottery);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("資料清除成功", "清除資料");
+
+                update_listbox(lottery, myListBox);
+            }
+        }
+
         private void btnBingoDelete_Click(object sender, EventArgs e)
         {
-
+            delete_listbox("BingoBingo", lboxBingo);
         }
 
         private void btnBingoLottery_Click(object sender, EventArgs e)
@@ -584,7 +639,7 @@ namespace Lottery
 
         private void btnBigDelete_Click(object sender, EventArgs e)
         {
-
+            delete_listbox("BigBingo", lboxBig);
         }
 
         private void btnBigLottery_Click(object sender, EventArgs e)
@@ -594,12 +649,60 @@ namespace Lottery
 
         private void btn539Delete_Click(object sender, EventArgs e)
         {
-
+            delete_listbox("539", lbox539);
         }
 
         private void btn539Lottery_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnBingoClear_Click(object sender, EventArgs e)
+        {
+            clear_listbox("BingoBingo", lboxBingo);
+        }
+
+        private void btnBigClear_Click(object sender, EventArgs e)
+        {
+            clear_listbox("BigBingo", lboxBig);
+        }
+
+        private void btn539Clear_Click(object sender, EventArgs e)
+        {
+            clear_listbox("539", lbox539);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult R;
+
+            R = MessageBox.Show("您確認要關閉表單?", "表單即將關閉",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (R == DialogResult.Yes)
+            {
+                //關閉
+            }
+            else
+            {
+                //取消
+                e.Cancel = true;
+            }
+        }
+
+        private void btn539Close_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnBigClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnBingoClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

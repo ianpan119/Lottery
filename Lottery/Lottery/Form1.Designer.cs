@@ -35,6 +35,8 @@
             this.tb539Number = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn539Lottery = new System.Windows.Forms.Button();
+            this.btn539Delete = new System.Windows.Forms.Button();
             this.lbox539 = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnBigConfirm = new System.Windows.Forms.Button();
@@ -42,30 +44,34 @@
             this.btnBigAuto = new System.Windows.Forms.Button();
             this.tbBigNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbBig = new System.Windows.Forms.GroupBox();
+            this.btnBigLottery = new System.Windows.Forms.Button();
+            this.btnBigDelete = new System.Windows.Forms.Button();
             this.lboxBig = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnBingoReset = new System.Windows.Forms.Button();
             this.btnBingoConfirm = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbBingo = new System.Windows.Forms.GroupBox();
+            this.btnBingoLottery = new System.Windows.Forms.Button();
+            this.btnBingoDelete = new System.Windows.Forms.Button();
             this.lboxBingo = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBingoAuto = new System.Windows.Forms.Button();
             this.tbBingoNumber = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.btnBingoDelete = new System.Windows.Forms.Button();
-            this.btnBingoLottery = new System.Windows.Forms.Button();
-            this.btnBigDelete = new System.Windows.Forms.Button();
-            this.btn539Delete = new System.Windows.Forms.Button();
-            this.btnBigLottery = new System.Windows.Forms.Button();
-            this.btn539Lottery = new System.Windows.Forms.Button();
+            this.gb539 = new System.Windows.Forms.TabControl();
+            this.btnBingoClose = new System.Windows.Forms.Button();
+            this.btnBingoClear = new System.Windows.Forms.Button();
+            this.btnBigClear = new System.Windows.Forms.Button();
+            this.btn539Clear = new System.Windows.Forms.Button();
+            this.btnBigClose = new System.Windows.Forms.Button();
+            this.btn539Close = new System.Windows.Forms.Button();
             this.tabPage3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbBig.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.gbBingo.SuspendLayout();
+            this.gb539.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage3
@@ -141,6 +147,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btn539Close);
+            this.groupBox3.Controls.Add(this.btn539Clear);
             this.groupBox3.Controls.Add(this.btn539Lottery);
             this.groupBox3.Controls.Add(this.btn539Delete);
             this.groupBox3.Controls.Add(this.lbox539);
@@ -152,6 +160,28 @@
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "歷史紀錄";
+            // 
+            // btn539Lottery
+            // 
+            this.btn539Lottery.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btn539Lottery.Location = new System.Drawing.Point(205, 532);
+            this.btn539Lottery.Name = "btn539Lottery";
+            this.btn539Lottery.Size = new System.Drawing.Size(145, 68);
+            this.btn539Lottery.TabIndex = 13;
+            this.btn539Lottery.Text = "開獎";
+            this.btn539Lottery.UseVisualStyleBackColor = true;
+            this.btn539Lottery.Click += new System.EventHandler(this.btn539Lottery_Click);
+            // 
+            // btn539Delete
+            // 
+            this.btn539Delete.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btn539Delete.Location = new System.Drawing.Point(7, 532);
+            this.btn539Delete.Name = "btn539Delete";
+            this.btn539Delete.Size = new System.Drawing.Size(145, 68);
+            this.btn539Delete.TabIndex = 13;
+            this.btn539Delete.Text = "刪除";
+            this.btn539Delete.UseVisualStyleBackColor = true;
+            this.btn539Delete.Click += new System.EventHandler(this.btn539Delete_Click);
             // 
             // lbox539
             // 
@@ -172,7 +202,7 @@
             this.tabPage2.Controls.Add(this.btnBigAuto);
             this.tabPage2.Controls.Add(this.tbBigNumber);
             this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.gbBig);
             this.tabPage2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tabPage2.Location = new System.Drawing.Point(4, 36);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
@@ -236,19 +266,43 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "選擇的號碼";
             // 
-            // groupBox2
+            // gbBig
             // 
-            this.groupBox2.Controls.Add(this.btnBigLottery);
-            this.groupBox2.Controls.Add(this.btnBigDelete);
-            this.groupBox2.Controls.Add(this.lboxBig);
-            this.groupBox2.Location = new System.Drawing.Point(669, 12);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(357, 616);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "歷史紀錄";
+            this.gbBig.Controls.Add(this.btnBigClose);
+            this.gbBig.Controls.Add(this.btnBigClear);
+            this.gbBig.Controls.Add(this.btnBigLottery);
+            this.gbBig.Controls.Add(this.btnBigDelete);
+            this.gbBig.Controls.Add(this.lboxBig);
+            this.gbBig.Location = new System.Drawing.Point(669, 12);
+            this.gbBig.Margin = new System.Windows.Forms.Padding(4);
+            this.gbBig.Name = "gbBig";
+            this.gbBig.Padding = new System.Windows.Forms.Padding(4);
+            this.gbBig.Size = new System.Drawing.Size(357, 616);
+            this.gbBig.TabIndex = 6;
+            this.gbBig.TabStop = false;
+            this.gbBig.Text = "歷史紀錄";
+            // 
+            // btnBigLottery
+            // 
+            this.btnBigLottery.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBigLottery.Location = new System.Drawing.Point(205, 532);
+            this.btnBigLottery.Name = "btnBigLottery";
+            this.btnBigLottery.Size = new System.Drawing.Size(145, 68);
+            this.btnBigLottery.TabIndex = 13;
+            this.btnBigLottery.Text = "開獎";
+            this.btnBigLottery.UseVisualStyleBackColor = true;
+            this.btnBigLottery.Click += new System.EventHandler(this.btnBigLottery_Click);
+            // 
+            // btnBigDelete
+            // 
+            this.btnBigDelete.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBigDelete.Location = new System.Drawing.Point(7, 532);
+            this.btnBigDelete.Name = "btnBigDelete";
+            this.btnBigDelete.Size = new System.Drawing.Size(145, 68);
+            this.btnBigDelete.TabIndex = 12;
+            this.btnBigDelete.Text = "刪除";
+            this.btnBigDelete.UseVisualStyleBackColor = true;
+            this.btnBigDelete.Click += new System.EventHandler(this.btnBigDelete_Click);
             // 
             // lboxBig
             // 
@@ -266,7 +320,7 @@
             this.tabPage1.BackColor = System.Drawing.Color.LightCoral;
             this.tabPage1.Controls.Add(this.btnBingoReset);
             this.tabPage1.Controls.Add(this.btnBingoConfirm);
-            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.gbBingo);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.btnBingoAuto);
             this.tabPage1.Controls.Add(this.tbBingoNumber);
@@ -303,19 +357,43 @@
             this.btnBingoConfirm.UseVisualStyleBackColor = true;
             this.btnBingoConfirm.Click += new System.EventHandler(this.btnBingoConfirm_Click);
             // 
-            // groupBox1
+            // gbBingo
             // 
-            this.groupBox1.Controls.Add(this.btnBingoLottery);
-            this.groupBox1.Controls.Add(this.btnBingoDelete);
-            this.groupBox1.Controls.Add(this.lboxBingo);
-            this.groupBox1.Location = new System.Drawing.Point(669, 12);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(357, 619);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "歷史紀錄";
+            this.gbBingo.Controls.Add(this.btnBingoClear);
+            this.gbBingo.Controls.Add(this.btnBingoClose);
+            this.gbBingo.Controls.Add(this.btnBingoLottery);
+            this.gbBingo.Controls.Add(this.btnBingoDelete);
+            this.gbBingo.Controls.Add(this.lboxBingo);
+            this.gbBingo.Location = new System.Drawing.Point(669, 12);
+            this.gbBingo.Margin = new System.Windows.Forms.Padding(4);
+            this.gbBingo.Name = "gbBingo";
+            this.gbBingo.Padding = new System.Windows.Forms.Padding(4);
+            this.gbBingo.Size = new System.Drawing.Size(357, 619);
+            this.gbBingo.TabIndex = 5;
+            this.gbBingo.TabStop = false;
+            this.gbBingo.Text = "歷史紀錄";
+            // 
+            // btnBingoLottery
+            // 
+            this.btnBingoLottery.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBingoLottery.Location = new System.Drawing.Point(205, 532);
+            this.btnBingoLottery.Name = "btnBingoLottery";
+            this.btnBingoLottery.Size = new System.Drawing.Size(145, 68);
+            this.btnBingoLottery.TabIndex = 3;
+            this.btnBingoLottery.Text = "開獎";
+            this.btnBingoLottery.UseVisualStyleBackColor = true;
+            this.btnBingoLottery.Click += new System.EventHandler(this.btnBingoLottery_Click);
+            // 
+            // btnBingoDelete
+            // 
+            this.btnBingoDelete.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBingoDelete.Location = new System.Drawing.Point(7, 532);
+            this.btnBingoDelete.Name = "btnBingoDelete";
+            this.btnBingoDelete.Size = new System.Drawing.Size(145, 68);
+            this.btnBingoDelete.TabIndex = 3;
+            this.btnBingoDelete.Text = "刪除";
+            this.btnBingoDelete.UseVisualStyleBackColor = true;
+            this.btnBingoDelete.Click += new System.EventHandler(this.btnBingoDelete_Click);
             // 
             // lboxBingo
             // 
@@ -325,7 +403,7 @@
             this.lboxBingo.Location = new System.Drawing.Point(8, 35);
             this.lboxBingo.Margin = new System.Windows.Forms.Padding(4);
             this.lboxBingo.Name = "lboxBingo";
-            this.lboxBingo.Size = new System.Drawing.Size(341, 490);
+            this.lboxBingo.Size = new System.Drawing.Size(341, 436);
             this.lboxBingo.TabIndex = 2;
             // 
             // label2
@@ -361,84 +439,84 @@
             this.tbBingoNumber.Size = new System.Drawing.Size(565, 47);
             this.tbBingoNumber.TabIndex = 4;
             // 
-            // tabControl1
+            // gb539
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tabControl1.Location = new System.Drawing.Point(59, 44);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1044, 675);
-            this.tabControl1.TabIndex = 0;
+            this.gb539.Controls.Add(this.tabPage1);
+            this.gb539.Controls.Add(this.tabPage2);
+            this.gb539.Controls.Add(this.tabPage3);
+            this.gb539.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.gb539.Location = new System.Drawing.Point(59, 44);
+            this.gb539.Margin = new System.Windows.Forms.Padding(4);
+            this.gb539.Name = "gb539";
+            this.gb539.SelectedIndex = 0;
+            this.gb539.Size = new System.Drawing.Size(1044, 675);
+            this.gb539.TabIndex = 0;
             // 
-            // btnBingoDelete
+            // btnBingoClose
             // 
-            this.btnBingoDelete.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.btnBingoDelete.Location = new System.Drawing.Point(7, 532);
-            this.btnBingoDelete.Name = "btnBingoDelete";
-            this.btnBingoDelete.Size = new System.Drawing.Size(145, 68);
-            this.btnBingoDelete.TabIndex = 3;
-            this.btnBingoDelete.Text = "刪除";
-            this.btnBingoDelete.UseVisualStyleBackColor = true;
-            this.btnBingoDelete.Click += new System.EventHandler(this.btnBingoDelete_Click);
+            this.btnBingoClose.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBingoClose.Location = new System.Drawing.Point(204, 427);
+            this.btnBingoClose.Name = "btnBingoClose";
+            this.btnBingoClose.Size = new System.Drawing.Size(145, 68);
+            this.btnBingoClose.TabIndex = 4;
+            this.btnBingoClose.Text = "關閉";
+            this.btnBingoClose.UseVisualStyleBackColor = true;
+            this.btnBingoClose.Click += new System.EventHandler(this.btnBingoClose_Click);
             // 
-            // btnBingoLottery
+            // btnBingoClear
             // 
-            this.btnBingoLottery.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.btnBingoLottery.Location = new System.Drawing.Point(205, 532);
-            this.btnBingoLottery.Name = "btnBingoLottery";
-            this.btnBingoLottery.Size = new System.Drawing.Size(145, 68);
-            this.btnBingoLottery.TabIndex = 3;
-            this.btnBingoLottery.Text = "開獎";
-            this.btnBingoLottery.UseVisualStyleBackColor = true;
-            this.btnBingoLottery.Click += new System.EventHandler(this.btnBingoLottery_Click);
+            this.btnBingoClear.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBingoClear.Location = new System.Drawing.Point(8, 427);
+            this.btnBingoClear.Name = "btnBingoClear";
+            this.btnBingoClear.Size = new System.Drawing.Size(145, 68);
+            this.btnBingoClear.TabIndex = 4;
+            this.btnBingoClear.Text = "清除";
+            this.btnBingoClear.UseVisualStyleBackColor = true;
+            this.btnBingoClear.Click += new System.EventHandler(this.btnBingoClear_Click);
             // 
-            // btnBigDelete
+            // btnBigClear
             // 
-            this.btnBigDelete.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.btnBigDelete.Location = new System.Drawing.Point(7, 532);
-            this.btnBigDelete.Name = "btnBigDelete";
-            this.btnBigDelete.Size = new System.Drawing.Size(145, 68);
-            this.btnBigDelete.TabIndex = 12;
-            this.btnBigDelete.Text = "刪除";
-            this.btnBigDelete.UseVisualStyleBackColor = true;
-            this.btnBigDelete.Click += new System.EventHandler(this.btnBigDelete_Click);
+            this.btnBigClear.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBigClear.Location = new System.Drawing.Point(8, 427);
+            this.btnBigClear.Name = "btnBigClear";
+            this.btnBigClear.Size = new System.Drawing.Size(145, 68);
+            this.btnBigClear.TabIndex = 14;
+            this.btnBigClear.Text = "清除";
+            this.btnBigClear.UseVisualStyleBackColor = true;
+            this.btnBigClear.Click += new System.EventHandler(this.btnBigClear_Click);
             // 
-            // btn539Delete
+            // btn539Clear
             // 
-            this.btn539Delete.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.btn539Delete.Location = new System.Drawing.Point(8, 532);
-            this.btn539Delete.Name = "btn539Delete";
-            this.btn539Delete.Size = new System.Drawing.Size(145, 68);
-            this.btn539Delete.TabIndex = 13;
-            this.btn539Delete.Text = "刪除";
-            this.btn539Delete.UseVisualStyleBackColor = true;
-            this.btn539Delete.Click += new System.EventHandler(this.btn539Delete_Click);
+            this.btn539Clear.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btn539Clear.Location = new System.Drawing.Point(8, 427);
+            this.btn539Clear.Name = "btn539Clear";
+            this.btn539Clear.Size = new System.Drawing.Size(145, 68);
+            this.btn539Clear.TabIndex = 14;
+            this.btn539Clear.Text = "清除";
+            this.btn539Clear.UseVisualStyleBackColor = true;
+            this.btn539Clear.Click += new System.EventHandler(this.btn539Clear_Click);
             // 
-            // btnBigLottery
+            // btnBigClose
             // 
-            this.btnBigLottery.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.btnBigLottery.Location = new System.Drawing.Point(205, 532);
-            this.btnBigLottery.Name = "btnBigLottery";
-            this.btnBigLottery.Size = new System.Drawing.Size(145, 68);
-            this.btnBigLottery.TabIndex = 13;
-            this.btnBigLottery.Text = "開獎";
-            this.btnBigLottery.UseVisualStyleBackColor = true;
-            this.btnBigLottery.Click += new System.EventHandler(this.btnBigLottery_Click);
+            this.btnBigClose.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btnBigClose.Location = new System.Drawing.Point(205, 427);
+            this.btnBigClose.Name = "btnBigClose";
+            this.btnBigClose.Size = new System.Drawing.Size(145, 68);
+            this.btnBigClose.TabIndex = 15;
+            this.btnBigClose.Text = "關閉";
+            this.btnBigClose.UseVisualStyleBackColor = true;
+            this.btnBigClose.Click += new System.EventHandler(this.btnBigClose_Click);
             // 
-            // btn539Lottery
+            // btn539Close
             // 
-            this.btn539Lottery.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
-            this.btn539Lottery.Location = new System.Drawing.Point(204, 532);
-            this.btn539Lottery.Name = "btn539Lottery";
-            this.btn539Lottery.Size = new System.Drawing.Size(145, 68);
-            this.btn539Lottery.TabIndex = 13;
-            this.btn539Lottery.Text = "開獎";
-            this.btn539Lottery.UseVisualStyleBackColor = true;
-            this.btn539Lottery.Click += new System.EventHandler(this.btn539Lottery_Click);
+            this.btn539Close.Font = new System.Drawing.Font("微軟正黑體", 15.75F);
+            this.btn539Close.Location = new System.Drawing.Point(204, 427);
+            this.btn539Close.Name = "btn539Close";
+            this.btn539Close.Size = new System.Drawing.Size(145, 68);
+            this.btn539Close.TabIndex = 15;
+            this.btn539Close.Text = "離開";
+            this.btn539Close.UseVisualStyleBackColor = true;
+            this.btn539Close.Click += new System.EventHandler(this.btn539Close_Click);
             // 
             // Form1
             // 
@@ -446,21 +524,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Khaki;
             this.ClientSize = new System.Drawing.Size(1155, 764);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.gb539);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.gbBig.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.gbBingo.ResumeLayout(false);
+            this.gb539.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -473,13 +552,13 @@
         private System.Windows.Forms.TextBox tbBingoNumber;
         private System.Windows.Forms.Button btnBingoReset;
         private System.Windows.Forms.Button btnBingoConfirm;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl gb539;
         private System.Windows.Forms.Button btnBingoAuto;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbBingo;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListBox lbox539;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbBig;
         private System.Windows.Forms.ListBox lboxBig;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
@@ -498,6 +577,12 @@
         private System.Windows.Forms.Button btnBigDelete;
         private System.Windows.Forms.Button btnBingoLottery;
         private System.Windows.Forms.Button btnBingoDelete;
+        private System.Windows.Forms.Button btnBingoClear;
+        private System.Windows.Forms.Button btnBingoClose;
+        private System.Windows.Forms.Button btn539Close;
+        private System.Windows.Forms.Button btn539Clear;
+        private System.Windows.Forms.Button btnBigClose;
+        private System.Windows.Forms.Button btnBigClear;
     }
 }
 
