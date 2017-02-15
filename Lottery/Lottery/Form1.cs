@@ -17,9 +17,9 @@ namespace Lottery
         List<Button> myDButtonList1 = new List<Button>();
         List<Button> myDButtonList2 = new List<Button>();
         List<Button> myDButtonList3 = new List<Button>();
-        List<int> myNumList1 = new List<int>();
-        List<int> myNumList2 = new List<int>();
-        List<int> myNumList3 = new List<int>();
+        List<int> myNumList1 = new List<int>(10);
+        List<int> myNumList2 = new List<int>(10);
+        List<int> myNumList3 = new List<int>(10);
 
         public Form1()
         {
@@ -40,6 +40,7 @@ namespace Lottery
             update_listbox("BingoBingo", lboxBingo);
             update_listbox("BigBingo", lboxBig);
             update_listbox("539", lbox539);
+            
         }
 
         private void dButton_Bingo_Click(object sender, EventArgs e)
@@ -195,7 +196,7 @@ namespace Lottery
 
                     dButton.BackColor = Color.White;
                     dButton.ForeColor = Color.Black;
-                    dButton.Location = new Point(20 + 60 * j, 20 + 60 * i);
+                    dButton.Location = new Point(10 + 60 * j, 20 + 60 * i);
                     dButton.Size = new Size(60, 60);
                     dButton.Text = Num.ToString();
                     dButton.Name = "btn" + "539" + Num.ToString();
@@ -216,6 +217,7 @@ namespace Lottery
         {
             Random R = new Random();
             string strNum = "";
+            string strMsg = "";
             int Count = 0;
 
             foreach (Button myButton in myDButtonList1)
@@ -269,54 +271,6 @@ namespace Lottery
             tbBingoNumber.Text = strNum;
         }
 
-        private void btnBingoConfirm_Click(object sender, EventArgs e)
-        {
-            if (myNumList1.Count == 10)
-            {
-                SqlConnection con = new SqlConnection(scsb.ToString());
-                con.Open();
-                string strSQL = "insert into myLottery values(@Lottery, @Num1, @Num2, @Num3, @Num4, @Num5, @Num6, @Num7, @Num8, @Num9, @Num10)";
-                SqlCommand cmd = new SqlCommand(strSQL, con);
-                cmd.Parameters.AddWithValue("@Lottery", "BingoBingo");
-                cmd.Parameters.AddWithValue("@Num1", myNumList1[0]);
-                cmd.Parameters.AddWithValue("@Num2", myNumList1[1]);
-                cmd.Parameters.AddWithValue("@Num3", myNumList1[2]);
-                cmd.Parameters.AddWithValue("@Num4", myNumList1[3]);
-                cmd.Parameters.AddWithValue("@Num5", myNumList1[4]);
-                cmd.Parameters.AddWithValue("@Num6", myNumList1[5]);
-                cmd.Parameters.AddWithValue("@Num7", myNumList1[6]);
-                cmd.Parameters.AddWithValue("@Num8", myNumList1[7]);
-                cmd.Parameters.AddWithValue("@Num9", myNumList1[8]);
-                cmd.Parameters.AddWithValue("@Num10", myNumList1[9]);
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-                tbBingoNumber.Text = "";
-                myNumList1.Clear();
-
-                foreach (Button myButton in myDButtonList1)
-                {
-                    myButton.BackColor = Color.White;
-                }
-                
-                update_listbox("BingoBingo", lboxBingo);
-            }
-            else
-            {
-                MessageBox.Show("請選擇10個數字");
-            }
-        }
-
-        private void btnBingoReset_Click(object sender, EventArgs e)
-        {
-            tbBingoNumber.Text = "";
-            myNumList1.Clear();
-            foreach (Button myButton in myDButtonList1)
-            {
-                myButton.BackColor = Color.White;
-            }
-        }
-
         private void btnBigAuto_Click(object sender, EventArgs e)
         {
             Random R = new Random();
@@ -329,7 +283,8 @@ namespace Lottery
                 {
                     myButton.BackColor = Color.White;
                     myNumList2.Remove(Convert.ToInt32(myButton.Text));
-                } else if (myButton.BackColor == Color.Red)
+                }
+                else if (myButton.BackColor == Color.Red)
                 {
                     Count++;
                 }
@@ -374,67 +329,20 @@ namespace Lottery
             tbBigNumber.Text = strNum;
         }
 
-        private void btnBigConfirm_Click(object sender, EventArgs e)
-        {
-            if (myNumList2.Count == 6)
-            {
-                SqlConnection con = new SqlConnection(scsb.ToString());
-                con.Open();
-                string strSQL = "insert into myLottery values(@Lottery, @Num1, @Num2, @Num3, @Num4, @Num5, @Num6, @Num7, @Num8, @Num9, @Num10)";
-                SqlCommand cmd = new SqlCommand(strSQL, con);
-                cmd.Parameters.AddWithValue("@Lottery", "BigBingo");
-                cmd.Parameters.AddWithValue("@Num1", myNumList2[0]);
-                cmd.Parameters.AddWithValue("@Num2", myNumList2[1]);
-                cmd.Parameters.AddWithValue("@Num3", myNumList2[2]);
-                cmd.Parameters.AddWithValue("@Num4", myNumList2[3]);
-                cmd.Parameters.AddWithValue("@Num5", myNumList2[4]);
-                cmd.Parameters.AddWithValue("@Num6", myNumList2[5]);
-                cmd.Parameters.AddWithValue("@Num7", -1);
-                cmd.Parameters.AddWithValue("@Num8", -1);
-                cmd.Parameters.AddWithValue("@Num9", -1);
-                cmd.Parameters.AddWithValue("@Num10", -1);
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-                tbBigNumber.Text = "";
-                myNumList2.Clear();
-
-                foreach (Button myButton in myDButtonList2)
-                {
-                    myButton.BackColor = Color.White;
-                }
-
-                update_listbox("BigBingo", lboxBig);
-            }
-            else
-            {
-                MessageBox.Show("請選擇6個數字");
-            }
-        }
-
-        private void btnBigReset_Click(object sender, EventArgs e)
-        {
-            tbBigNumber.Text = "";
-            myNumList2.Clear();
-            foreach (Button myButton in myDButtonList2)
-            {
-                myButton.BackColor = Color.White;
-            }
-        }
-
         private void btn539Auto_Click(object sender, EventArgs e)
         {
-            Random R = new Random();            
+            Random R = new Random();
             string strNum = "";
             int Count = 0;
-            
+
             foreach (Button myButton in myDButtonList3)
             {
                 if (myButton.BackColor == Color.Orange)
                 {
                     myButton.BackColor = Color.White;
                     myNumList3.Remove(Convert.ToInt32(myButton.Text));
-                } else if (myButton.BackColor == Color.Red)
+                }
+                else if (myButton.BackColor == Color.Red)
                 {
                     Count++;
                 }
@@ -443,11 +351,12 @@ namespace Lottery
             if (Count == 5)
             {
                 MessageBox.Show("請選擇小於5個數字");
-            } else if (myNumList3.Count == 5)
+            }
+            else if (myNumList3.Count == 5)
             {
                 myNumList3.Clear();
             }
-            
+
             while (myNumList3.Count < 5)
             {
                 int Number = R.Next(1, 40);
@@ -467,7 +376,7 @@ namespace Lottery
                     }
                 }
             }
-            
+
             myNumList3.Sort();
 
             foreach (int myList in myNumList3)
@@ -478,28 +387,96 @@ namespace Lottery
             tb539Number.Text = strNum;
         }
 
-        private void btn539Confirm_Click(object sender, EventArgs e)
+        private void btnBingoConfirm_Click(object sender, EventArgs e)
         {
-            if (myNumList3.Count == 5)
+            if (myNumList1.Count == 10)
             {
                 SqlConnection con = new SqlConnection(scsb.ToString());
                 con.Open();
                 string strSQL = "insert into myLottery values(@Lottery, @Num1, @Num2, @Num3, @Num4, @Num5, @Num6, @Num7, @Num8, @Num9, @Num10)";
                 SqlCommand cmd = new SqlCommand(strSQL, con);
-                cmd.Parameters.AddWithValue("@Lottery", "539");
-                cmd.Parameters.AddWithValue("@Num1", myNumList3[0]);
-                cmd.Parameters.AddWithValue("@Num2", myNumList3[1]);
-                cmd.Parameters.AddWithValue("@Num3", myNumList3[2]);
-                cmd.Parameters.AddWithValue("@Num4", myNumList3[3]);
-                cmd.Parameters.AddWithValue("@Num5", myNumList3[4]);
-                cmd.Parameters.AddWithValue("@Num6", -1);
-                cmd.Parameters.AddWithValue("@Num7", -1);
-                cmd.Parameters.AddWithValue("@Num8", -1);
-                cmd.Parameters.AddWithValue("@Num9", -1);
-                cmd.Parameters.AddWithValue("@Num10", -1);
+                cmd.Parameters.AddWithValue("@Lottery", "BingoBingo");
+                cmd.Parameters.AddWithValue("@Num1", myNumList1[0]);
+                cmd.Parameters.AddWithValue("@Num2", myNumList1[1]);
+                cmd.Parameters.AddWithValue("@Num3", myNumList1[2]);
+                cmd.Parameters.AddWithValue("@Num4", myNumList1[3]);
+                cmd.Parameters.AddWithValue("@Num5", myNumList1[4]);
+                cmd.Parameters.AddWithValue("@Num6", myNumList1[5]);
+                cmd.Parameters.AddWithValue("@Num7", myNumList1[6]);
+                cmd.Parameters.AddWithValue("@Num8", myNumList1[7]);
+                cmd.Parameters.AddWithValue("@Num9", myNumList1[8]);
+                cmd.Parameters.AddWithValue("@Num10", myNumList1[9]);
 
                 cmd.ExecuteNonQuery();
                 con.Close();
+                tbBingoNumber.Text = "";
+                myNumList1.Clear();
+
+                foreach (Button myButton in myDButtonList1)
+                {
+                    myButton.BackColor = Color.White;
+                }
+
+                update_listbox("BingoBingo", lboxBingo);
+            }
+            else
+            {
+                MessageBox.Show("請選擇10個數字");
+            }
+        }
+
+        private void btnBigConfirm_Click(object sender, EventArgs e)
+        {
+            if (myNumList2.Count == 6)
+            {
+                SqlConnection con = new SqlConnection(scsb.ToString());
+                con.Open();
+                string strSQL = "insert into myLottery values(@Lottery, @Num1, @Num2, @Num3, @Num4, @Num5, @Num6, @Num7, @Num8, @Num9, @Num10)";
+                SqlCommand cmd = new SqlCommand(strSQL, con);
+                cmd.Parameters.AddWithValue("@Lottery", "BigBingo");
+                string strNum = "";
+
+
+                for (int count = 1; count <= 10; count++)
+                {
+                    if (count > myNumList2.Count)
+                    {
+                        strNum = string.Format("@" + "Num" + count);
+                        cmd.Parameters.AddWithValue(strNum, DBNull.Value);
+
+                    }
+                    else
+                    {
+                        strNum = string.Format("@" + "Num" + count);
+                        cmd.Parameters.AddWithValue(strNum, myNumList2[count - 1]);
+
+                    }
+                }
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+                tbBigNumber.Text = "";
+                myNumList2.Clear();
+
+                foreach (Button myButton in myDButtonList2)
+                {
+                    myButton.BackColor = Color.White;
+                }
+
+                update_listbox("BigBingo", lboxBig);
+            }
+            else
+            {
+                MessageBox.Show("請選擇6個數字");
+            }
+        }
+
+        private void btn539Confirm_Click(object sender, EventArgs e)
+        {
+            if (myNumList3.Count == 5)
+            {
+                insert_date("539", myNumList3);
+
                 tb539Number.Text = "";
                 myNumList3.Clear();
 
@@ -517,6 +494,26 @@ namespace Lottery
 
         }
 
+        private void btnBingoReset_Click(object sender, EventArgs e)
+        {
+            tbBingoNumber.Text = "";
+            myNumList1.Clear();
+            foreach (Button myButton in myDButtonList1)
+            {
+                myButton.BackColor = Color.White;
+            }
+        }
+
+        private void btnBigReset_Click(object sender, EventArgs e)
+        {
+            tbBigNumber.Text = "";
+            myNumList2.Clear();
+            foreach (Button myButton in myDButtonList2)
+            {
+                myButton.BackColor = Color.White;
+            }
+        }
+
         private void btn539Reset_Click(object sender, EventArgs e)
         {
             tb539Number.Text = "";
@@ -525,6 +522,33 @@ namespace Lottery
             {
                 myButton.BackColor = Color.White;
             }
+        }
+
+        private void insert_date(string lottery, List<int> myNumList)
+        {
+            SqlConnection con = new SqlConnection(scsb.ToString());
+            con.Open();
+            string strSQL = "insert into myLottery values(@Lottery, @Num1, @Num2, @Num3, @Num4, @Num5, @Num6, @Num7, @Num8, @Num9, @Num10)";
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+            cmd.Parameters.AddWithValue("@Lottery", lottery);
+            string strNum = "";
+            
+            for (int count = 1; count <= 10; count++)
+            {
+                if (count > myNumList.Count)
+                {
+                    strNum = string.Format("@" + "Num" + count);
+                    cmd.Parameters.AddWithValue(strNum, DBNull.Value);
+                }
+                else
+                {
+                    strNum = string.Format("@" + "Num" + count);
+                    cmd.Parameters.AddWithValue(strNum, myNumList[count - 1]);
+                }
+            }
+
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         private void update_listbox(string lottery, ListBox myListBox)
@@ -537,35 +561,13 @@ namespace Lottery
             SqlDataReader reader = cmd.ExecuteReader();
             
             int count = 0;
-
-            switch (lottery)
+            while (reader.Read())
             {
-                case "BingoBingo":
-                    while (reader.Read())
-                    {
-                        myListBox.Items.Add(string.Format("{0:D2}-{1:D2},{2:D2},{3:D2},{4:D2},{5:D2},{6:D2},{7:D2},{8:D2},{9:D2},{10:D2}",
-                            reader["id"], reader["號碼1"], reader["號碼2"], reader["號碼3"], reader["號碼4"], reader["號碼5"],
-                            reader["號碼6"], reader["號碼7"], reader["號碼8"], reader["號碼9"], reader["號碼10"]));
-                        count++;
-                    }
-                    break;
-                case "BigBingo":
-                    while (reader.Read())
-                    {
-                        myListBox.Items.Add(string.Format("{0:D2}-{1:D2},{2:D2},{3:D2},{4:D2},{5:D2},{5:D2}",
-                            reader["id"], reader["號碼1"], reader["號碼2"], reader["號碼3"], 
-                            reader["號碼4"], reader["號碼5"], reader["號碼6"]));
-                        count++;
-                    }
-                    break;
-                case "539":
-                    while (reader.Read())
-                    {
-                        myListBox.Items.Add(string.Format("{0:D2}-{1:D2},{2:D2},{3:D2},{4:D2},{5:D2}",
-                            reader["id"], reader["號碼1"], reader["號碼2"], reader["號碼3"], reader["號碼4"], reader["號碼5"]));
-                        count++;
-                    }
-                    break;
+                myListBox.Items.Add(string.Format("{0:D2}-{1:D2} {2:D2} {3:D2} {4:D2} {5:D2} {6:D2} {7:D2} {8:D2} {9:D2} {10:D2}",
+                    reader["id"], reader["號碼1"], reader["號碼2"], reader["號碼3"], 
+                    reader["號碼4"], reader["號碼5"], reader["號碼6"], reader["號碼7"], 
+                    reader["號碼8"], reader["號碼9"], reader["號碼10"]));
+                count++;
             }
             myListBox.Items.Insert(0, "總共" + count + "筆");
             reader.Close();
@@ -585,7 +587,7 @@ namespace Lottery
                 if (R == DialogResult.Yes)
                 {
                     string s = (string)myListBox.Items[index];
-                    string[] sArray = (s.Split('-', ' ', ','));
+                    string[] sArray = s.Split('-');
                     SqlConnection con = new SqlConnection(scsb.ToString());
                     con.Open();
                     string strSQL = string.Format("delete from myLottery where id = '{0}';", sArray[0]);
@@ -601,7 +603,7 @@ namespace Lottery
             }
             else
             {
-                MessageBox.Show("請選擇正確的筆數");
+                MessageBox.Show("請選擇要刪除的筆數");
             }
         }
 
@@ -632,24 +634,24 @@ namespace Lottery
             delete_listbox("BingoBingo", lboxBingo);
         }
 
+        private void btnBigDelete_Click(object sender, EventArgs e)
+        {
+            delete_listbox("BigBingo", lboxBig);
+        }        
+
+        private void btn539Delete_Click(object sender, EventArgs e)
+        {
+            delete_listbox("539", lbox539);
+        }
+
         private void btnBingoLottery_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnBigDelete_Click(object sender, EventArgs e)
-        {
-            delete_listbox("BigBingo", lboxBig);
-        }
-
         private void btnBigLottery_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void btn539Delete_Click(object sender, EventArgs e)
-        {
-            delete_listbox("539", lbox539);
         }
 
         private void btn539Lottery_Click(object sender, EventArgs e)
