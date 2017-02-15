@@ -65,6 +65,8 @@
             this.btnBingoAuto = new System.Windows.Forms.Button();
             this.tbBingoNumber = new System.Windows.Forms.TextBox();
             this.gb539 = new System.Windows.Forms.TabControl();
+            this.cbStar = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -362,6 +364,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.LightCoral;
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.cbStar);
             this.tabPage1.Controls.Add(this.btnBingoReset);
             this.tabPage1.Controls.Add(this.btnBingoConfirm);
             this.tabPage1.Controls.Add(this.gbBingo);
@@ -518,6 +522,35 @@
             this.gb539.Size = new System.Drawing.Size(1083, 675);
             this.gb539.TabIndex = 0;
             // 
+            // cbStar
+            // 
+            this.cbStar.FormattingEnabled = true;
+            this.cbStar.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.cbStar.Location = new System.Drawing.Point(7, 510);
+            this.cbStar.Name = "cbStar";
+            this.cbStar.Size = new System.Drawing.Size(54, 35);
+            this.cbStar.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(15, 472);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 37);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "★";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -583,6 +616,8 @@
         private System.Windows.Forms.Button btn539Clear;
         private System.Windows.Forms.Button btnBigClose;
         private System.Windows.Forms.Button btnBigClear;
+        private System.Windows.Forms.ComboBox cbStar;
+        private System.Windows.Forms.Label label4;
     }
 }
 

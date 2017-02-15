@@ -17,9 +17,9 @@ namespace Lottery
         List<Button> myDButtonList1 = new List<Button>();
         List<Button> myDButtonList2 = new List<Button>();
         List<Button> myDButtonList3 = new List<Button>();
-        List<int> myNumList1 = new List<int>(10);
-        List<int> myNumList2 = new List<int>(10);
-        List<int> myNumList3 = new List<int>(10);
+        List<int> myNumList1 = new List<int>();
+        List<int> myNumList2 = new List<int>();
+        List<int> myNumList3 = new List<int>();
 
         public Form1()
         {
@@ -47,22 +47,32 @@ namespace Lottery
         {
             Button myButton = (Button)sender;
             string strNum = "";
-            if (myButton.BackColor == Color.White)
+
+            if (cbStar.SelectedIndex > 0)
             {
-                if (myNumList1.Count == 10)
+                if (myButton.BackColor == Color.White)
                 {
-                    MessageBox.Show("請選擇10個數字");
-                } else
-                {
-                    myButton.BackColor = Color.Red;
-                    myNumList1.Add(Convert.ToInt32(myButton.Text));
+                    if (myNumList1.Count == (cbStar.SelectedIndex + 1))
+                    {
+                        MessageBox.Show("請選擇" + (cbStar.SelectedIndex + 1) + "個數字");
+                    }
+                    else
+                    {
+                        myButton.BackColor = Color.Red;
+                        myNumList1.Add(Convert.ToInt32(myButton.Text));
+                    }
+
                 }
-                
+                else
+                {
+                    myButton.BackColor = Color.White;
+                    myNumList1.Remove(Convert.ToInt32(myButton.Text));
+                }
             } else
             {
-                myButton.BackColor = Color.White;
-                myNumList1.Remove(Convert.ToInt32(myButton.Text));
+                MessageBox.Show("請選擇星數");
             }
+            
             myNumList1.Sort();
             foreach (int myNum in myNumList1)
             {
@@ -142,7 +152,7 @@ namespace Lottery
 
                     dButton.BackColor = Color.White;
                     dButton.ForeColor = Color.Black;
-                    dButton.Location = new Point(40 + 45 * j, 20 + 45 * i);
+                    dButton.Location = new Point(20 + 45 * j, 20 + 45 * i);
                     dButton.Size = new Size(45, 45);
                     dButton.Text = Num.ToString();
                     dButton.Name = "btn" + "Bingo" + Num.ToString();
@@ -217,55 +227,45 @@ namespace Lottery
         {
             Random R = new Random();
             string strNum = "";
-            string strMsg = "";
-            int Count = 0;
+            myNumList1.Clear();
+            int count = cbStar.SelectedIndex + 1;
 
             foreach (Button myButton in myDButtonList1)
             {
-                if (myButton.BackColor == Color.Orange)
+                if (myButton.BackColor == Color.Red)
+                {
+                    myNumList1.Add(Convert.ToInt32(myButton.Text));
+
+                }
+                else
                 {
                     myButton.BackColor = Color.White;
-                    myNumList1.Remove(Convert.ToInt32(myButton.Text));
-                } else if (myButton.BackColor == Color.Red)
-                {
-                    Count++;
                 }
             }
 
-            if (Count == 10)
+            if (count == 0)
             {
-                MessageBox.Show("請選擇小於10個數字");
-            }
-            else if (myNumList1.Count == 10)
+                MessageBox.Show("請選擇星數");
+            } else if (myNumList1.Count >= count)
             {
-                myNumList1.Clear();
+                MessageBox.Show("請選擇小於" + count + "個數字");
             }
 
-            while (myNumList1.Count < 10)
+            while (myNumList1.Count < count)
             {
                 int Number = R.Next(1, 81);
                 if (myNumList1.IndexOf(Number) < 0)
                 {
                     myNumList1.Add(Number);
-                }
-            }
-
-            foreach (int myNum in myNumList1)
-            {
-                foreach (Button myButton in myDButtonList1)
-                {
-                    if (myButton.Text == myNum.ToString() && myButton.BackColor != Color.Red)
-                    {
-                        myButton.BackColor = Color.Orange;
-                    }
+                    myDButtonList1[Number - 1].BackColor = Color.Orange;
                 }
             }
 
             myNumList1.Sort();
 
-            foreach (int myList in myNumList1)
+            foreach (int myNum in myNumList1)
             {
-                strNum += string.Format("{0:D2}, ", myList);
+                strNum += string.Format("{0:D2}, ", myNum);
             }
 
             tbBingoNumber.Text = strNum;
@@ -275,28 +275,23 @@ namespace Lottery
         {
             Random R = new Random();
             string strNum = "";
-            int Count = 0;
+            myNumList2.Clear();            
 
             foreach (Button myButton in myDButtonList2)
             {
-                if (myButton.BackColor == Color.Orange)
+                if (myButton.BackColor == Color.Red)
+                {
+                    myNumList2.Add(Convert.ToInt32(myButton.Text));
+                    
+                } else
                 {
                     myButton.BackColor = Color.White;
-                    myNumList2.Remove(Convert.ToInt32(myButton.Text));
-                }
-                else if (myButton.BackColor == Color.Red)
-                {
-                    Count++;
                 }
             }
 
-            if (Count == 6)
+            if (myNumList2.Count == 6)
             {
                 MessageBox.Show("請選擇小於6個數字");
-            }
-            else if (myNumList2.Count == 6)
-            {
-                myNumList2.Clear();
             }
 
             while (myNumList2.Count < 6)
@@ -305,25 +300,15 @@ namespace Lottery
                 if (myNumList2.IndexOf(Number) < 0)
                 {
                     myNumList2.Add(Number);
-                }
-            }
-
-            foreach (int myNum in myNumList2)
-            {
-                foreach (Button myButton in myDButtonList2)
-                {
-                    if (myButton.Text == myNum.ToString() && myButton.BackColor != Color.Red)
-                    {
-                        myButton.BackColor = Color.Orange;
-                    }
+                    myDButtonList2[Number - 1].BackColor = Color.Orange;
                 }
             }
 
             myNumList2.Sort();
 
-            foreach (int myList in myNumList2)
+            foreach (int myNum in myNumList2)
             {
-                strNum += string.Format("{0:D2}, ", myList);
+                strNum += string.Format("{0:D2}, ", myNum);
             }
 
             tbBigNumber.Text = strNum;
@@ -333,28 +318,24 @@ namespace Lottery
         {
             Random R = new Random();
             string strNum = "";
-            int Count = 0;
+            myNumList3.Clear();
 
             foreach (Button myButton in myDButtonList3)
             {
-                if (myButton.BackColor == Color.Orange)
+                if (myButton.BackColor == Color.Red)
+                {
+                    myNumList3.Add(Convert.ToInt32(myButton.Text));
+
+                }
+                else
                 {
                     myButton.BackColor = Color.White;
-                    myNumList3.Remove(Convert.ToInt32(myButton.Text));
-                }
-                else if (myButton.BackColor == Color.Red)
-                {
-                    Count++;
                 }
             }
 
-            if (Count == 5)
+            if (myNumList3.Count == 5)
             {
                 MessageBox.Show("請選擇小於5個數字");
-            }
-            else if (myNumList3.Count == 5)
-            {
-                myNumList3.Clear();
             }
 
             while (myNumList3.Count < 5)
@@ -363,25 +344,15 @@ namespace Lottery
                 if (myNumList3.IndexOf(Number) < 0)
                 {
                     myNumList3.Add(Number);
-                }
-            }
-
-            foreach (int myNum in myNumList3)
-            {
-                foreach (Button myButton in myDButtonList3)
-                {
-                    if (myButton.Text == myNum.ToString() && myButton.BackColor != Color.Red)
-                    {
-                        myButton.BackColor = Color.Orange;
-                    }
+                    myDButtonList3[Number - 1].BackColor = Color.Orange;
                 }
             }
 
             myNumList3.Sort();
 
-            foreach (int myList in myNumList3)
+            foreach (int myNum in myNumList3)
             {
-                strNum += string.Format("{0:D2}, ", myList);
+                strNum += string.Format("{0:D2}, ", myNum);
             }
 
             tb539Number.Text = strNum;
@@ -389,39 +360,29 @@ namespace Lottery
 
         private void btnBingoConfirm_Click(object sender, EventArgs e)
         {
-            if (myNumList1.Count == 10)
+            if (cbStar.SelectedIndex > 0)
             {
-                SqlConnection con = new SqlConnection(scsb.ToString());
-                con.Open();
-                string strSQL = "insert into myLottery values(@Lottery, @Num1, @Num2, @Num3, @Num4, @Num5, @Num6, @Num7, @Num8, @Num9, @Num10)";
-                SqlCommand cmd = new SqlCommand(strSQL, con);
-                cmd.Parameters.AddWithValue("@Lottery", "BingoBingo");
-                cmd.Parameters.AddWithValue("@Num1", myNumList1[0]);
-                cmd.Parameters.AddWithValue("@Num2", myNumList1[1]);
-                cmd.Parameters.AddWithValue("@Num3", myNumList1[2]);
-                cmd.Parameters.AddWithValue("@Num4", myNumList1[3]);
-                cmd.Parameters.AddWithValue("@Num5", myNumList1[4]);
-                cmd.Parameters.AddWithValue("@Num6", myNumList1[5]);
-                cmd.Parameters.AddWithValue("@Num7", myNumList1[6]);
-                cmd.Parameters.AddWithValue("@Num8", myNumList1[7]);
-                cmd.Parameters.AddWithValue("@Num9", myNumList1[8]);
-                cmd.Parameters.AddWithValue("@Num10", myNumList1[9]);
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-                tbBingoNumber.Text = "";
-                myNumList1.Clear();
-
-                foreach (Button myButton in myDButtonList1)
+                if (myNumList1.Count == (cbStar.SelectedIndex + 1))
                 {
-                    myButton.BackColor = Color.White;
-                }
+                    insert_date("BingoBingo", myNumList1);
 
-                update_listbox("BingoBingo", lboxBingo);
-            }
-            else
+                    tbBingoNumber.Text = "";
+                    myNumList1.Clear();
+
+                    foreach (Button myButton in myDButtonList1)
+                    {
+                        myButton.BackColor = Color.White;
+                    }
+
+                    update_listbox("BingoBingo", lboxBingo);
+                }
+                else
+                {
+                    MessageBox.Show("請選擇" + (cbStar.SelectedIndex + 1) + "個數字");
+                }
+            } else
             {
-                MessageBox.Show("請選擇10個數字");
+                MessageBox.Show("請選擇星數");
             }
         }
 
@@ -429,32 +390,8 @@ namespace Lottery
         {
             if (myNumList2.Count == 6)
             {
-                SqlConnection con = new SqlConnection(scsb.ToString());
-                con.Open();
-                string strSQL = "insert into myLottery values(@Lottery, @Num1, @Num2, @Num3, @Num4, @Num5, @Num6, @Num7, @Num8, @Num9, @Num10)";
-                SqlCommand cmd = new SqlCommand(strSQL, con);
-                cmd.Parameters.AddWithValue("@Lottery", "BigBingo");
-                string strNum = "";
+                insert_date("BigBingo", myNumList2);
 
-
-                for (int count = 1; count <= 10; count++)
-                {
-                    if (count > myNumList2.Count)
-                    {
-                        strNum = string.Format("@" + "Num" + count);
-                        cmd.Parameters.AddWithValue(strNum, DBNull.Value);
-
-                    }
-                    else
-                    {
-                        strNum = string.Format("@" + "Num" + count);
-                        cmd.Parameters.AddWithValue(strNum, myNumList2[count - 1]);
-
-                    }
-                }
-
-                cmd.ExecuteNonQuery();
-                con.Close();
                 tbBigNumber.Text = "";
                 myNumList2.Clear();
 
