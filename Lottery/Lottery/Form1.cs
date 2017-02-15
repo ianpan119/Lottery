@@ -32,9 +32,15 @@ namespace Lottery
             generate_Big_dButton(7, 7);
             generate_539_dButton(5, 8);
 
+            /*
             scsb = new SqlConnectionStringBuilder();
             scsb.DataSource = @"IAN-PC\MSSQLSERVER16";
             scsb.InitialCatalog = "csharp1";
+            scsb.IntegratedSecurity = true;
+            */
+            scsb = new SqlConnectionStringBuilder();
+            scsb.DataSource = @"(localdb)\MSSQLLocalDB";
+            scsb.AttachDBFilename = @"|DataDirectory|\DB\C sharp.mdf";
             scsb.IntegratedSecurity = true;
             
             update_listbox("BingoBingo", lboxBingo);
