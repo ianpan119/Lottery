@@ -54,7 +54,7 @@ namespace Lottery
             Button myButton = (Button)sender;
             string strNum = "";
 
-            if (cbStar.SelectedIndex > 0)
+            if (cbStar.SelectedIndex >= 0)
             {
                 if (myButton.BackColor == Color.White)
                 {
@@ -366,7 +366,7 @@ namespace Lottery
 
         private void btnBingoConfirm_Click(object sender, EventArgs e)
         {
-            if (cbStar.SelectedIndex > 0)
+            if (cbStar.SelectedIndex >= 0)
             {
                 if (myNumList1.Count == (cbStar.SelectedIndex + 1))
                 {
