@@ -572,6 +572,139 @@ namespace Lottery
             }
         }
 
+        private void lottery(string lottery)
+        {
+            myNumList2.Clear();
+            tbBigNumber.Text = "";
+
+            List<int> myNumList = new List<int>();
+            SqlConnection con = new SqlConnection(scsb.ToString());
+            con.Open();
+            string strSQL = string.Format("select * from myLottery where 彩券 = '{0}';", lottery);
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            int count = 0;
+            int counts = 0;
+            int num = 1;
+            string strMsg = "本期開獎號碼: ";
+            string strNum = "";
+            Random R = new Random();
+
+            while (myNumList2.Count < 7)
+            {
+                int Number = R.Next(1, 50);
+                if (myNumList2.IndexOf(Number) < 0)
+                {
+                    myNumList2.Add(Number);                    
+                }
+            }
+            myNumList2.Sort();
+            
+            foreach (int myNum in myNumList2)
+            {            
+                if (num == myNumList2.Count)
+                {
+                    strMsg += " 特別號:";
+                }
+                strMsg += myNum.ToString() + " ";
+                num++;
+            }
+            
+
+            while (reader.Read())
+            {
+                myNumList.Clear();
+                for (int i = 1; i <= 10; i++)
+                {
+                    strNum = "號碼" + i.ToString();
+                    
+                    if (reader[strNum] == DBNull.Value)
+                    {
+                        //break;
+                    } else
+                    {
+                        myNumList.Add((int)reader[strNum]);
+                    }
+                }
+
+                count = 0;
+                counts = 0;
+
+                for (int i = 0; i < myNumList2.Count; i++)
+                {
+                    if (i == (myNumList2.Count - 1))
+                    {
+                        if (myNumList.IndexOf(myNumList2[i]) >= 0)
+                        {
+                            counts++;
+                        }
+                    } else 
+                    {
+                        if (myNumList.IndexOf(myNumList2[i]) >= 0)
+                        {
+                            count++;
+                        }
+                    }
+                }
+                strMsg += "\n" + count + counts;
+                
+                switch (count)
+                {
+                    case 2:
+                        if (counts == 1)
+                        {
+                            strMsg += "您中了\"柒獎\"";
+                        }
+                        break;
+
+                    case 3:
+                        if (counts == 1)
+                        { 
+                            strMsg += "您中了\"陸獎\"";
+                        } else
+                        {
+                            strMsg += "您中了\"普獎\"";
+                        }
+                        break;
+
+                    case 4:
+                        if (counts == 1)
+                        {
+                            strMsg += "您中了\"肆獎\"";
+                        }
+                        else
+                        {
+                            strMsg += "您中了\"伍獎\"";
+                        }
+                        break;
+
+                    case 5:
+                        if (counts == 1)
+                        {
+                            strMsg += "您中了\"貳獎\"";
+                        }
+                        else
+                        {
+                            strMsg += "您中了\"參獎\"";
+                        }
+                        break;
+
+                    case 6:                        
+                            strMsg += "您中了\"頭獎\"";                        
+                        break;
+
+                    default:
+                        break;
+                }            
+                
+            }
+
+            MessageBox.Show(strMsg);
+            reader.Close();
+            con.Close();
+        }
+
         private void btnBingoDelete_Click(object sender, EventArgs e)
         {
             delete_listbox("BingoBingo", lboxBingo);
@@ -590,11 +723,12 @@ namespace Lottery
         private void btnBingoLottery_Click(object sender, EventArgs e)
         {
 
+            
         }
 
         private void btnBigLottery_Click(object sender, EventArgs e)
         {
-
+            lottery("BigBingo");
         }
 
         private void btn539Lottery_Click(object sender, EventArgs e)
