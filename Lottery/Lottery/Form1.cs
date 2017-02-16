@@ -53,6 +53,7 @@ namespace Lottery
         {
             Button myButton = (Button)sender;
             string strNum = "";
+            int count = 1;
 
             if (cbStar.SelectedIndex >= 0)
             {
@@ -82,7 +83,12 @@ namespace Lottery
             myNumList1.Sort();
             foreach (int myNum in myNumList1)
             {
-                strNum += string.Format("{0:D2}, ", myNum);
+                strNum += string.Format("{0:D2}", myNum);
+                if (count < myNumList1.Count)
+                {
+                    strNum += ", ";
+                }
+                count++;
             }
             tbBingoNumber.Text = strNum;
         }
@@ -91,6 +97,7 @@ namespace Lottery
         {
             Button myButton = (Button)sender;
             string strNum = "";
+            int count = 1;
             if (myButton.BackColor == Color.White)
             {
                 if (myNumList2.Count == 6)
@@ -112,7 +119,12 @@ namespace Lottery
             myNumList2.Sort();
             foreach (int myNum in myNumList2)
             {
-                strNum += string.Format("{0:D2}, ", myNum);
+                strNum += string.Format("{0:D2}", myNum);
+                if (count < myNumList2.Count)
+                {
+                    strNum += ", ";
+                }
+                count++;
             }
             tbBigNumber.Text = strNum;
         }
@@ -121,6 +133,7 @@ namespace Lottery
         {
             Button myButton = (Button)sender;
             string strNum = "";
+            int count = 1;
             if (myButton.BackColor == Color.White)
             {
                 if (myNumList3.Count == 5)
@@ -142,7 +155,12 @@ namespace Lottery
             myNumList3.Sort();
             foreach (int myNum in myNumList3)
             {
-                strNum += string.Format("{0:D2}, ", myNum);
+                strNum += string.Format("{0:D2}", myNum);
+                if (count < myNumList3.Count)
+                {
+                    strNum += ", ";
+                }
+                count++;
             }
             tb539Number.Text = strNum;
         }
@@ -234,7 +252,8 @@ namespace Lottery
             Random R = new Random();
             string strNum = "";
             myNumList1.Clear();
-            int count = cbStar.SelectedIndex + 1;
+            int counter = cbStar.SelectedIndex + 1;
+            int count = 1;
 
             foreach (Button myButton in myDButtonList1)
             {
@@ -249,15 +268,15 @@ namespace Lottery
                 }
             }
 
-            if (count == 0)
+            if (counter == 0)
             {
                 MessageBox.Show("請選擇星數");
-            } else if (myNumList1.Count >= count)
+            } else if (myNumList1.Count >= counter)
             {
-                MessageBox.Show("請選擇小於" + count + "個數字");
+                MessageBox.Show("請選擇小於" + counter + "個數字");
             }
 
-            while (myNumList1.Count < count)
+            while (myNumList1.Count < counter)
             {
                 int Number = R.Next(1, 81);
                 if (myNumList1.IndexOf(Number) < 0)
@@ -271,7 +290,12 @@ namespace Lottery
 
             foreach (int myNum in myNumList1)
             {
-                strNum += string.Format("{0:D2}, ", myNum);
+                strNum += string.Format("{0:D2}", myNum);
+                if (count < myNumList1.Count)
+                {
+                    strNum += ", ";
+                }
+                count++;
             }
 
             tbBingoNumber.Text = strNum;
@@ -281,7 +305,8 @@ namespace Lottery
         {
             Random R = new Random();
             string strNum = "";
-            myNumList2.Clear();            
+            myNumList2.Clear();
+            int count = 1;          
 
             foreach (Button myButton in myDButtonList2)
             {
@@ -314,7 +339,12 @@ namespace Lottery
 
             foreach (int myNum in myNumList2)
             {
-                strNum += string.Format("{0:D2}, ", myNum);
+                strNum += string.Format("{0:D2}", myNum);
+                if (count < myNumList2.Count)
+                {
+                    strNum += ", ";
+                }
+                count++;
             }
 
             tbBigNumber.Text = strNum;
@@ -325,6 +355,7 @@ namespace Lottery
             Random R = new Random();
             string strNum = "";
             myNumList3.Clear();
+            int count = 1;
 
             foreach (Button myButton in myDButtonList3)
             {
@@ -358,7 +389,12 @@ namespace Lottery
 
             foreach (int myNum in myNumList3)
             {
-                strNum += string.Format("{0:D2}, ", myNum);
+                strNum += string.Format("{0:D2}", myNum);
+                if (count < myNumList3.Count)
+                {
+                    strNum += ", ";
+                }
+                count++;
             }
 
             tb539Number.Text = strNum;
@@ -572,139 +608,6 @@ namespace Lottery
             }
         }
 
-        private void lottery(string lottery)
-        {
-            myNumList2.Clear();
-            tbBigNumber.Text = "";
-
-            List<int> myNumList = new List<int>();
-            SqlConnection con = new SqlConnection(scsb.ToString());
-            con.Open();
-            string strSQL = string.Format("select * from myLottery where 彩券 = '{0}';", lottery);
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            int count = 0;
-            int counts = 0;
-            int num = 1;
-            string strMsg = "本期開獎號碼: ";
-            string strNum = "";
-            Random R = new Random();
-
-            while (myNumList2.Count < 7)
-            {
-                int Number = R.Next(1, 50);
-                if (myNumList2.IndexOf(Number) < 0)
-                {
-                    myNumList2.Add(Number);                    
-                }
-            }
-            myNumList2.Sort();
-            
-            foreach (int myNum in myNumList2)
-            {            
-                if (num == myNumList2.Count)
-                {
-                    strMsg += " 特別號:";
-                }
-                strMsg += myNum.ToString() + " ";
-                num++;
-            }
-            
-
-            while (reader.Read())
-            {
-                myNumList.Clear();
-                for (int i = 1; i <= 10; i++)
-                {
-                    strNum = "號碼" + i.ToString();
-                    
-                    if (reader[strNum] == DBNull.Value)
-                    {
-                        //break;
-                    } else
-                    {
-                        myNumList.Add((int)reader[strNum]);
-                    }
-                }
-
-                count = 0;
-                counts = 0;
-
-                for (int i = 0; i < myNumList2.Count; i++)
-                {
-                    if (i == (myNumList2.Count - 1))
-                    {
-                        if (myNumList.IndexOf(myNumList2[i]) >= 0)
-                        {
-                            counts++;
-                        }
-                    } else 
-                    {
-                        if (myNumList.IndexOf(myNumList2[i]) >= 0)
-                        {
-                            count++;
-                        }
-                    }
-                }
-                strMsg += "\n" + count + counts;
-                
-                switch (count)
-                {
-                    case 2:
-                        if (counts == 1)
-                        {
-                            strMsg += "您中了\"柒獎\"";
-                        }
-                        break;
-
-                    case 3:
-                        if (counts == 1)
-                        { 
-                            strMsg += "您中了\"陸獎\"";
-                        } else
-                        {
-                            strMsg += "您中了\"普獎\"";
-                        }
-                        break;
-
-                    case 4:
-                        if (counts == 1)
-                        {
-                            strMsg += "您中了\"肆獎\"";
-                        }
-                        else
-                        {
-                            strMsg += "您中了\"伍獎\"";
-                        }
-                        break;
-
-                    case 5:
-                        if (counts == 1)
-                        {
-                            strMsg += "您中了\"貳獎\"";
-                        }
-                        else
-                        {
-                            strMsg += "您中了\"參獎\"";
-                        }
-                        break;
-
-                    case 6:                        
-                            strMsg += "您中了\"頭獎\"";                        
-                        break;
-
-                    default:
-                        break;
-                }            
-                
-            }
-
-            MessageBox.Show(strMsg);
-            reader.Close();
-            con.Close();
-        }
-
         private void btnBingoDelete_Click(object sender, EventArgs e)
         {
             delete_listbox("BingoBingo", lboxBingo);
@@ -723,17 +626,276 @@ namespace Lottery
         private void btnBingoLottery_Click(object sender, EventArgs e)
         {
 
-            
+            MessageBox.Show("此功能尚未上線","訊息",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void btnBigLottery_Click(object sender, EventArgs e)
         {
-            lottery("BigBingo");
+            myNumList2.Clear();
+            tbBigNumber.Text = "";
+
+            List<int> myNumList = new List<int>();
+            SqlConnection con = new SqlConnection(scsb.ToString());
+            con.Open();
+            string strSQL = "select * from myLottery where 彩券 = 'BigBingo';";
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            int count = 0;
+            int counts = 0;
+            int num = 1;
+            int number = 0;
+            string strMsg = "本期開獎號碼: ";
+            string strNum = "";
+            Random R = new Random();
+
+            while (myNumList2.Count < 7)
+            {
+                int Number = R.Next(1, 50);
+                if (myNumList2.IndexOf(Number) < 0)
+                {
+                    myNumList2.Add(Number);
+                }
+            }
+            myNumList2.Sort();
+
+            foreach (int myNum in myNumList2)
+            {
+                if (num == myNumList2.Count)
+                {
+                    strMsg += " 特別號:";
+                }
+                strMsg += myNum.ToString() + " ";
+                num++;
+            }
+            strMsg += "\n";
+
+            while (reader.Read())
+            {
+                myNumList.Clear();
+                for (int i = 1; i <= 10; i++)
+                {
+                    strNum = "號碼" + i.ToString();
+
+                    if (reader[strNum] == DBNull.Value)
+                    {
+                        //break;
+                    }
+                    else
+                    {
+                        myNumList.Add((int)reader[strNum]);
+                    }
+                }
+
+                count = 0;
+                counts = 0;
+
+                for (int i = 0; i < myNumList2.Count; i++)
+                {
+                    if (i == (myNumList2.Count - 1))
+                    {
+                        if (myNumList.IndexOf(myNumList2[i]) >= 0)
+                        {
+                            counts++;
+                        }
+                    }
+                    else
+                    {
+                        if (myNumList.IndexOf(myNumList2[i]) >= 0)
+                        {
+                            count++;
+                        }
+                    }
+                }
+
+                switch (count)
+                {
+                    case 2:
+                        if (counts == 1)
+                        {
+                            foreach (int myNum in myNumList)
+                                strMsg += myNum + " ";
+                            strMsg += "您中了\"柒獎\"\n";
+                            number++;
+                        }
+                        break;
+
+                    case 3:
+                        foreach (int myNum in myNumList)
+                            strMsg += myNum + " ";
+                        if (counts == 1)
+                        {
+                            strMsg += "您中了\"陸獎\"\n";
+                        }
+                        else
+                        {
+                            strMsg += "您中了\"普獎\"\n";
+                        }
+                        number++;
+                        break;
+
+                    case 4:
+                        foreach (int myNum in myNumList)
+                            strMsg += myNum + " ";
+                        if (counts == 1)
+                        {
+                            strMsg += "您中了\"肆獎\"\n";
+                        }
+                        else
+                        {
+                            strMsg += "您中了\"伍獎\"\n";
+                        }
+                        number++;
+                        break;
+
+                    case 5:
+                        foreach (int myNum in myNumList)
+                            strMsg += myNum + " ";
+                        if (counts == 1)
+                        {
+                            strMsg += "您中了\"貳獎\"\n";
+                        }
+                        else
+                        {
+                            strMsg += "您中了\"參獎\"\n";
+                        }
+                        number++;
+                        break;
+
+                    case 6:
+                        foreach (int myNum in myNumList)
+                            strMsg += myNum + " ";
+                        strMsg += "您中了\"頭獎\"\n";
+                        number++;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            if (number == 0)
+            {
+                strMsg += "您並沒有中獎，再接再厲!";
+            }
+            else
+            {
+                strMsg += "您共中了" + number + "筆，恭喜發財!";
+            }
+
+            MessageBox.Show(strMsg);
+            reader.Close();
+            con.Close();
         }
 
         private void btn539Lottery_Click(object sender, EventArgs e)
         {
+            myNumList3.Clear();
+            tb539Number.Text = "";
 
+            List<int> myNumList = new List<int>();
+            SqlConnection con = new SqlConnection(scsb.ToString());
+            con.Open();
+            string strSQL = "select * from myLottery where 彩券 = '539';";
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            int count = 0;
+            int number = 0;
+            string strMsg = "本期開獎號碼: ";
+            string strNum = "";
+            Random R = new Random();
+
+            while (myNumList3.Count < 5)
+            {
+                int Number = R.Next(1, 40);
+                if (myNumList3.IndexOf(Number) < 0)
+                {
+                    myNumList3.Add(Number);
+                }
+            }
+            myNumList3.Sort();
+
+            foreach (int myNum in myNumList3)
+            {
+                strMsg += myNum.ToString() + " ";
+            }
+            strMsg += "\n";
+
+            while (reader.Read())
+            {
+                myNumList.Clear();
+                for (int i = 1; i <= 10; i++)
+                {
+                    strNum = "號碼" + i.ToString();
+
+                    if (reader[strNum] == DBNull.Value)
+                    {
+                        //break;
+                    }
+                    else
+                    {
+                        myNumList.Add((int)reader[strNum]);
+                    }
+                }
+
+                count = 0;
+
+                for (int i = 0; i < myNumList3.Count; i++)
+                {
+                    if (myNumList.IndexOf(myNumList3[i]) >= 0)
+                    {
+                        count++;
+                    }
+                }
+
+                switch (count)
+                {
+                    case 2:
+                        foreach (int myNum in myNumList)
+                            strMsg += myNum + " ";
+                        strMsg += "您中了\"肆獎\"\n";
+                        number++;
+                        break;
+
+                    case 3:
+                        foreach (int myNum in myNumList)
+                            strMsg += myNum + " ";
+                        strMsg += "您中了\"參獎\"\n";
+                        number++;
+                        break;
+
+                    case 4:
+                        foreach (int myNum in myNumList)
+                            strMsg += myNum + " ";
+                        strMsg += "您中了\"貳獎\"\n";
+                        number++;
+                        break;
+
+                    case 5:
+                        foreach (int myNum in myNumList)
+                            strMsg += myNum + " ";
+                        strMsg += "您中了\"頭獎\"\n";
+                        number++;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            if (number == 0)
+            {
+                strMsg += "您並沒有中獎，再接再厲!";
+            }
+            else
+            {
+                strMsg += "您共中了" + number + "筆，恭喜發財!";
+            }
+
+            MessageBox.Show(strMsg);
+            reader.Close();
+            con.Close();
         }
 
         private void btnBingoClear_Click(object sender, EventArgs e)
